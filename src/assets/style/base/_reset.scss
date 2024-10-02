@@ -1,0 +1,53 @@
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-block-start: var(--scroll-padding-start, 1.5em);
+}
+
+body {
+	margin: 0;
+	background-color: $maincolor;
+	font-family: "Lato",
+		"Helvetica Neue",
+		Helvetica,
+		Arial,
+		sans-serif;
+	;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+}
+
+p {
+	margin: 0 0 1em;
+}
+
+a {
+	text-decoration: none;
+	color: unset;
+	cursor: pointer;
+}
+
+ul,
+ol {
+	list-style: none;
+	padding: 0;
+}
+
+/* Dont stretch my Media */
+img,
+embed,
+video,
+object {
+	display: block;
+	max-width: 100%;
+}
