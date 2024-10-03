@@ -1,7 +1,8 @@
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Routes } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import AppHeader from './cmps/AppHeader'
 import { store } from './store/store'
+import Suggestions from './pages/Suggestions'
 
 export function App() {
   return (
@@ -9,8 +10,10 @@ export function App() {
       <Router>
         <section className='main-layout'>
           <AppHeader />
-          <main className='app-layout'>
-            <Routes>{/* <Route element={<Home />} path='/'></Route> */}</Routes>
+          <main className='app-layout main-layout full '>
+            <Routes>
+              <Route element={<Suggestions />} path='/'></Route>
+            </Routes>
           </main>
         </section>
       </Router>

@@ -1,0 +1,20 @@
+.suggestions-layout {
+    height: 100%;
+    background: red;
+}
+
+.feedback-menu-layout {
+    color: $white1;
+    height: rem(56px);
+    background-color: $deepblue1;
+
+
+}
+
+.feedback-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+}

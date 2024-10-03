@@ -1,3 +1,5 @@
+import { SvgIcon } from './Svgicon'
+
 function AppHeader(): JSX.Element {
   return (
     <header className='header-layout full main-layout'>
@@ -7,11 +9,7 @@ function AppHeader(): JSX.Element {
           <h2>Feedback Board</h2>
         </div>
         <div className='header-menu'>
-          <svg width='20' height='17' xmlns='http://www.w3.org/2000/svg'>
-            <g fill='#FFF' fillRule='evenodd'>
-              <path d='M0 0h20v3H0zM0 7h20v3H0zM0 14h20v3H0z' />
-            </g>
-          </svg>
+          <SvgIcon iconName='hamburger' />
         </div>
       </div>
     </header>

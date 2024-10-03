@@ -9,14 +9,7 @@
 @import 'base/layout';
 
 /* Components */
-@import 'cmps/AppHeader';
-// @import 'cmps/AppHeader';
-// @import 'cmps/AppNavAside';
-// @import 'cmps/AppFooter';
-// @import 'cmps/ToyIndex';
-// @import 'cmps/ToyEdit';s
-// @import 'cmps/ToyDetails';
-// @import 'cmps/ToyFilter';
-// @import 'cmps/LoginSignup';
-// @import 'cmps/ToyList';
-/* Media Queries */
+@import 'cmps/Suggestions/Suggestions';
+@import 'cmps/Suggestions/AppHeader';
+@import 'cmps/Suggestions/SortBy';
+@import 'cmps/Suggestions/AddFeedback';

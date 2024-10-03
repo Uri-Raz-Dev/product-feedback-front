@@ -1,0 +1,26 @@
+.sort-dropdown {
+    display: flex;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    :nth-child(2) {
+        margin-inline-start: rem(8px);
+        stroke: $white1;
+
+
+    }
+}
+
+.sort-menu {
+    :first-child {
+        font-size: rem(13px);
+        line-height: 19px;
+        text-align: right;
+
+        :first-child {
+            font-weight: bold;
+        }
+    }
+}
