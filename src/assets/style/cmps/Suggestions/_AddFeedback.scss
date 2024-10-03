@@ -1,0 +1,25 @@
+.add-feedback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: rem(13px);
+    width: 134px;
+    height: 40px;
+    font-weight: 700;
+    line-height: 19px;
+    background-color: $purple;
+    border-radius: 10px;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    :first-child {
+        margin-inline-end: rem(2px);
+
+        .plus {
+            margin-block-start: rem(7px);
+            font-style: normal;
+        }
+    }
+}
