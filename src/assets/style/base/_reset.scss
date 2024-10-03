@@ -9,13 +9,9 @@ html {
 
 body {
 	margin: 0;
-	background-color: $maincolor;
-	font-family: "Lato",
-		"Helvetica Neue",
-		Helvetica,
-		Arial,
-		sans-serif;
-	;
+	font-family: 'Jost', sans-serif;
+	font-size: rem(16px);
+	line-height: rem(23px);
 }
 
 h1,
@@ -25,6 +21,7 @@ h4,
 h5,
 h6 {
 	margin: 0;
+
 }
 
 p {
@@ -50,4 +47,39 @@ video,
 object {
 	display: block;
 	max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	font-weight: bold;
+}
+
+h1 {
+	font-size: rem(24px);
+	line-height: rem(35px);
+	letter-spacing: rem(-0.33px);
+
+}
+
+h2 {
+	font-size: rem(20px);
+	line-height: rem(29px);
+	letter-spacing: rem(-0.25px);
+
+}
+
+h3 {
+	font-size: rem(18px);
+	line-height: rem(29px);
+	letter-spacing: rem(-0.25px);
+
+}
+
+h4 {
+	font-size: rem(24px);
+	line-height: rem(20px);
+	letter-spacing: rem(-0.2px);
+
 }

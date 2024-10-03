@@ -7,7 +7,7 @@ export function App() {
   return (
     <Provider store={store}>
       <Router>
-        <section className='main-layout grid'>
+        <section className='main-layout'>
           <AppHeader />
           <main className='app-layout'>
             <Routes>{/* <Route element={<Home />} path='/'></Route> */}</Routes>
