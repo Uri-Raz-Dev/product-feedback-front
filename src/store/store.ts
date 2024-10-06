@@ -3,10 +3,10 @@ import {
   compose,
   legacy_createStore as createStore,
 } from 'redux'
-import { productReducer } from './reducers/product.reducer'
+import { suggestionsReducer } from './reducers/suggestions.reducer'
 
 const rootReducer = combineReducers({
-  productModule: productReducer,
+  suggestionsModule: suggestionsReducer,
 })
 
 declare global {
@@ -17,3 +17,4 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 export const store = createStore(rootReducer, composeEnhancers())
+export type RootState = ReturnType<typeof store.getState>
