@@ -6,12 +6,12 @@ export const storageService = {
   remove,
 }
 
-interface EntityWithId {
+export interface EntityWithId {
   _id: string
 }
-function query<Type>(entityType: string, delay = 500): Promise<Type[]> {
+function query<T>(entityType: string, delay = 500): Promise<T[]> {
   const storedData = localStorage.getItem(entityType)
-  const entities: Type[] = storedData ? JSON.parse(storedData) : []
+  const entities: T[] = storedData ? JSON.parse(storedData) : []
   return new Promise((resolve) => setTimeout(() => resolve(entities), delay))
 }
 
@@ -37,7 +37,7 @@ async function get<Type extends EntityWithId>(
   }
 }
 
-async function post<Type>(entityType: string, newEntity: Type): Promise<Type> {
+async function post<T>(entityType: string, newEntity: T): Promise<T> {
   newEntity = { ...newEntity, _id: _makeId() }
   try {
     const entities = await query(entityType)
@@ -50,10 +50,10 @@ async function post<Type>(entityType: string, newEntity: Type): Promise<Type> {
   }
 }
 
-async function put<Type extends EntityWithId>(
+async function put<T extends EntityWithId>(
   entityType: string,
-  updatedEntity: Type
-): Promise<Type> {
+  updatedEntity: T
+): Promise<T> {
   try {
     const entities = (await query(entityType)) as EntityWithId[]
     const idx = entities.findIndex((entity) => entity._id === updatedEntity._id)
@@ -88,7 +88,7 @@ async function remove(entityType: string, entityId: string) {
 
 // Private functions
 
-function _save<Type>(entityType: string, entities: Type) {
+function _save<T>(entityType: string, entities: T) {
   localStorage.setItem(entityType, JSON.stringify(entities))
 }
 
