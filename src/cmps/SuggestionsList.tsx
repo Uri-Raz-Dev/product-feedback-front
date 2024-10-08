@@ -1,22 +1,33 @@
 import { Suggestions } from '../services/feedback.service.local'
+import { utilService } from '../services/util.service'
+import { SvgIcon } from './Svgicon'
 
 interface SuggestionsListProps {
-  suggestions: Suggestions[] // suggestions is an array of Suggestions
+  suggestions: Suggestions[]
 }
 
 function SuggestionsList({ suggestions }: SuggestionsListProps): JSX.Element {
   return (
-    <section className='suggestions-list-layout'>
-      <ul className='suggestions-list'>
+    <section className='suggestions-list-layout full main-layout'>
+      <ul className='suggestions-list '>
         {suggestions.map((suggestion) =>
           suggestion.productRequests.map((s) => {
             return (
               <li key={s._id}>
-                <p>{s.title}</p>
-                <p>{s.category}</p>
-                <p>{s.upvotes}</p>
+                <div>{s.title}</div>
                 <p>{s.description}</p>
-                <div>{s.comments?.length ?? 0}</div>
+
+                <div>{utilService.toUpperCase(s.category)}</div>
+                <section className='upvote-and-comment'>
+                  <div>
+                    <SvgIcon iconName='arrowUp' />
+                    <span> {s.upvotes}</span>
+                  </div>
+                  <div>
+                    <SvgIcon iconName='comments' />
+                    <span> {s.comments?.length ?? 0}</span>
+                  </div>
+                </section>
               </li>
             )
           })

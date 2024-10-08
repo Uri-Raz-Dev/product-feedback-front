@@ -4,6 +4,7 @@ export const utilService = {
   getRandomIntInclusive,
   debounce,
   convertTimestampToDate,
+  toUpperCase,
 }
 
 function makeId(length: number = 6): string {
@@ -89,4 +90,10 @@ function convertTimestampToDate(timestamp: number | string): string {
     year: 'numeric',
   })
   return formattedDate
+}
+
+function toUpperCase(str: string): string {
+  const upperCaseStr = str.charAt(0).toUpperCase() + str.slice(1, str.length)
+
+  return upperCaseStr
 }
