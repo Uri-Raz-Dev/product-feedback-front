@@ -6,6 +6,12 @@ export const ADD_SUGGESTION = 'ADD_SUGGESTION'
 export const UPDATE_SUGGESTION = 'UPDATE_SUGGESTION'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
 export const EDIT_SUGGESTION = 'EDIT_SUGGESTION'
+export const SET_SIDEBAR = 'SET_SIDEBAR'
+
+type SuggestionsState = {
+  suggestions: Suggestions[]
+  sidebar: boolean
+}
 
 type ReducerAction = {
   type: string
@@ -13,10 +19,12 @@ type ReducerAction = {
   suggestion?: void
   suggestionToEdit?: Suggestions
   suggestionId?: string
+  sidebar?: boolean
 }
 
-const initialState = {
-  suggestions: [] as Suggestions[],
+const initialState: SuggestionsState = {
+  suggestions: [],
+  sidebar: false,
 }
 export function suggestionsReducer(
   state = initialState,
@@ -55,6 +63,8 @@ export function suggestionsReducer(
     case EDIT_SUGGESTION:
       return { ...state, suggestionToEdit: action.suggestionToEdit }
 
+    case SET_SIDEBAR:
+      return { ...state, sidebar: action.sidebar! }
     //TODO: ADD FILTERBY
     // case SET_FILTER_BY:
     //   return { ...state, filterBy: action.filterBy }

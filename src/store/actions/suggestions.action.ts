@@ -2,6 +2,7 @@ import { feedbackService } from '../../services/feedback.service.local'
 import {
   ADD_SUGGESTION,
   REMOVE_SUGGESTION,
+  SET_SIDEBAR,
   SET_SUGGESTIONS,
   UPDATE_SUGGESTION,
 } from '../reducers/suggestions.reducer'
@@ -41,4 +42,8 @@ export async function removeSuggestion(suggestionId: string) {
     console.log((e as Error).message)
     throw new Error("Couldn't load suggestions")
   }
+}
+
+export function setSideBar(sidebar = false) {
+  return store.dispatch({ type: SET_SIDEBAR, sidebar })
 }

@@ -2,7 +2,7 @@ import { Suggestions } from '../services/feedback.service.local'
 import { utilService } from '../services/util.service'
 import { SvgIcon } from './Svgicon'
 
-interface SuggestionsListProps {
+export interface SuggestionsListProps {
   suggestions: Suggestions[]
 }
 

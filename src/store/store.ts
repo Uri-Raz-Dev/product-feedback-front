@@ -15,6 +15,11 @@ declare global {
   }
 }
 
+// Redux DevTools setup
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+// Create the store with the composed enhancers
 export const store = createStore(rootReducer, composeEnhancers())
-export type RootState = ReturnType<typeof store.getState>
+
+// Export RootState type to be used throughout the application
+export type RootState = ReturnType<typeof rootReducer>
