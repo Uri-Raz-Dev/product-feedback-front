@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import AddFeedback from '../cmps/AddFeedback'
 import SortBy from '../cmps/SortBy'
 import SuggestionsList from '../cmps/SuggestionsList'
@@ -25,6 +25,7 @@ function Suggestions(): JSX.Element {
     'Bug',
     'Feature',
   ]
+
   return (
     <div className='suggestions-layout full main-layout'>
       <section className='feedback-menu-layout full main-layout '>

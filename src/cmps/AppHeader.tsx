@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { SvgIcon } from './Svgicon'
 import { setSideBar } from '../store/actions/suggestions.action'
 import { useSelector } from 'react-redux'
