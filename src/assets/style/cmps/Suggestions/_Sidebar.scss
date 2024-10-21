@@ -21,7 +21,8 @@
 .category-list {
     display: flex;
     background-color: $white1;
-    align-items: center;
+    // align-items: center;
+    justify-content: center;
     width: rem(223px);
     height: rem(178px);
     flex-wrap: wrap;
@@ -29,10 +30,8 @@
     border-radius: 10px;
 
     >li {
-        // display: flex;
-
-        width: auto;
-        height: auto;
+        height: min-content;
+        font-size: rem(13px);
         margin-inline: rem(8px);
         background-color: $white2;
         color: $blue;
@@ -40,6 +39,27 @@
         padding-inline: em(16px);
         padding-block: em(6px);
         border-radius: 10px;
+    }
+
+    >li:nth-of-type(3) {
+        margin-inline-end: rem(22px);
+    }
+
+    >li:last-of-type {
+        margin-inline-end: rem(107px);
+        margin-block-end: rem(24px);
+    }
+
+    >li:first-of-type,
+    li:nth-of-type(2),
+    li:nth-of-type(3) {
+        margin-block-start: rem(24px);
+        // margin-block-end: rem(4px);
+    }
+
+    >li:nth-of-type(4),
+    li:nth-of-type(5) {
+        margin-block: rem(14px);
     }
 }
 

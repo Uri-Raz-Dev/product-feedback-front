@@ -18,7 +18,7 @@ function Suggestions(): JSX.Element {
   }, [])
 
   const categories: string[] = [
-    'ALL',
+    'All',
     'UI',
     'UX',
     'Enhancement',
