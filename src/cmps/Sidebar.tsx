@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { setSideBar } from '../store/actions/suggestions.action'
 
 type Categories = {
   categories: string[]
@@ -7,7 +8,10 @@ type Categories = {
 function Sidebar({ categories, sidebar }: Categories): JSX.Element {
   return (
     <>
-      <div className='layout'></div>
+      <div
+        onClick={() => setSideBar(false)}
+        className={sidebar ? 'layout active' : 'layout'}
+      ></div>
       <aside className={sidebar ? 'sidebar open' : 'sidebar'}>
         <section className='categories'>
           <ul className='category-list'>
