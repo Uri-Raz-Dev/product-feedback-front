@@ -39,6 +39,12 @@
         padding-inline: em(16px);
         padding-block: em(6px);
         border-radius: 10px;
+
+        &:hover,
+        &:active {
+            background-color: $blue;
+            color: $white1;
+        }
     }
 
     >li:nth-of-type(3) {
@@ -71,28 +77,80 @@
 
     .roadmap-header {
         display: flex;
-        justify-content: space-between;
-        margin-inline: rem(8px);
+        // justify-content: space-between;
+        margin-inline: rem(24px);
         margin-block-start: rem(12px);
+
+        >:first-child {
+            flex-grow: 1;
+            flex-shrink: 0;
+            font-size: rem(18px);
+            font-weight: bold;
+            color: $deepblue2;
+        }
+
+        >:nth-child(2) {
+            font-size: rem(13px);
+            color: $blue;
+            font-weight: 600;
+            text-decoration: underline;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
     }
 
     .roadmap-links {
         display: flex;
         flex-direction: column;
         row-gap: rem(8px);
-        margin-inline: rem(8px);
+        margin-inline: rem(24px);
 
         >li {
             display: flex;
 
             :first-child {
+                width: rem(8px);
+                height: rem(8px);
                 margin-inline-end: rem(16px);
+                margin-block-start: rem(8px);
             }
+
 
             :nth-child(2) {
                 flex-grow: 1;
                 flex-shrink: 0;
             }
+
+            :last-child {
+                font-weight: bold;
+                color: $deepblue3;
+            }
         }
+
+        li:nth-of-type(1) {
+            span:nth-of-type(1) {
+                background-color: $red-orange;
+                border-radius: 100%;
+            }
+        }
+
+        li:nth-of-type(2) {
+            span:nth-of-type(1) {
+                background-color: $purple;
+                border-radius: 100%;
+            }
+        }
+
+        li:nth-of-type(3) {
+            span:nth-of-type(1) {
+                background-color: $aqua;
+                border-radius: 100%;
+            }
+        }
+
+
     }
 }

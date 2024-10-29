@@ -23,17 +23,17 @@ function Sidebar({ categories, sidebar }: Categories): JSX.Element {
           </section>
           <ul className='roadmap-links'>
             <li>
-              <span>c</span>
+              <span></span>
               <span>Planned</span>
               <span>1</span>
             </li>
             <li>
-              <span>c</span>
+              <span></span>
               <span>In-Progress</span>
               <span>1</span>
             </li>
             <li>
-              <span>c</span>
+              <span></span>
               <span>Live</span>
               <span>1</span>
             </li>
