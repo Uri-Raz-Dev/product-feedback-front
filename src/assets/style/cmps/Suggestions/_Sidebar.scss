@@ -21,13 +21,12 @@
 .category-list {
     display: flex;
     background-color: $white1;
-    // align-items: center;
     justify-content: center;
     width: rem(223px);
     height: rem(178px);
     flex-wrap: wrap;
-
     border-radius: 10px;
+    margin-block: rem(24px);
 
     >li {
         height: min-content;
