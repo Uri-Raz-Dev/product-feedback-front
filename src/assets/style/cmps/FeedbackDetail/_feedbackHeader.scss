@@ -1,0 +1,32 @@
+.feedback-header {
+    display: flex;
+    align-items: center;
+    margin-block-start: rem(24px);
+
+    >:first-child {
+        flex-grow: 1;
+        flex-shrink: 0;
+
+        >:nth-child(2) {
+            margin-inline-start: rem(16px);
+            color: $deepblue3;
+            font-weight: bold;
+        }
+    }
+
+}
+
+.edit-feedback {
+    height: fit-content;
+    background-color: $blue;
+    color: $white1;
+    font-size: rem(13px);
+    font-weight: bold;
+    border-radius: 10px;
+    padding-inline: em(16px);
+    padding-block: em(10.5px);
+
+    &:hover {
+        cursor: pointer;
+    }
+}

@@ -9,9 +9,14 @@
 @import 'base/layout';
 
 /* Components */
+
+// Suggestions
 @import 'cmps/Suggestions/Suggestions';
 @import 'cmps/Suggestions/AppHeader';
 @import 'cmps/Suggestions/SortBy';
 @import 'cmps/Suggestions/AddFeedback';
 @import 'cmps/Suggestions/SuggestionsList';
 @import 'cmps/Suggestions/Sidebar';
+
+//FeedbackDetail
+@import 'cmps/FeedbackDetail/feedbackHeader';
