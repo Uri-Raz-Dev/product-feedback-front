@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Suggestions } from '../services/feedback.service.local'
 import { utilService } from '../services/util.service'
 import { SvgIcon } from './Svgicon'
@@ -23,10 +24,10 @@ function SuggestionsList({ suggestions }: SuggestionsListProps): JSX.Element {
                     <SvgIcon iconName='arrowUp' />
                     <span> {s.upvotes}</span>
                   </div>
-                  <div>
+                  <Link to={`feedback/${s._id}`}>
                     <SvgIcon iconName='comments' />
                     <span> {s.comments?.length ?? 0}</span>
-                  </div>
+                  </Link>
                 </section>
               </li>
             )

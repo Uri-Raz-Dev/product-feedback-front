@@ -1,6 +1,7 @@
 import { Suggestions } from '../../services/feedback.service.local'
 
 export const SET_SUGGESTIONS = 'SET_SUGGESTIONS'
+export const SET_SUGGESTION = 'SET_SUGGESTION'
 export const REMOVE_SUGGESTION = 'REMOVE_SUGGESTION'
 export const ADD_SUGGESTION = 'ADD_SUGGESTION'
 export const UPDATE_SUGGESTION = 'UPDATE_SUGGESTION'
@@ -11,12 +12,13 @@ export const SET_SIDEBAR = 'SET_SIDEBAR'
 type SuggestionsState = {
   suggestions: Suggestions[]
   sidebar: boolean
+  suggestion: null
 }
 
 type ReducerAction = {
   type: string
   suggestions?: Suggestions[]
-  suggestion?: void
+  suggestion?: any
   suggestionToEdit?: Suggestions
   suggestionId?: string
   sidebar?: boolean
@@ -25,6 +27,7 @@ type ReducerAction = {
 const initialState: SuggestionsState = {
   suggestions: [],
   sidebar: false,
+  suggestion: null,
 }
 export function suggestionsReducer(
   state = initialState,
@@ -33,6 +36,9 @@ export function suggestionsReducer(
   switch (action.type) {
     case SET_SUGGESTIONS:
       return { ...state, suggestions: action.suggestions || [] }
+
+    case SET_SUGGESTION:
+      return { ...state, suggestion: action.suggestion }
     case ADD_SUGGESTION:
       return {
         ...state,

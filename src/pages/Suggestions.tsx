@@ -17,6 +17,7 @@ function Suggestions(): JSX.Element {
     loadSuggestions()
   }, [])
 
+  console.log(suggestions)
   const categories: string[] = [
     'All',
     'UI',

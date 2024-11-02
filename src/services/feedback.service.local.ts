@@ -1,6 +1,6 @@
 import { EntityWithId, storageService } from './async-storage.service'
 
-const STOARGE_KEY = 'suggestions'
+const STORAGE_KEY = 'suggestions'
 
 export interface Suggestions {
   currentUser: {
@@ -32,28 +32,41 @@ export interface Suggestions {
 
 export const feedbackService = {
   query,
-  getSuggestionBy_id,
+  getSuggestionById,
   remove,
   saveSuggestion,
 }
 
 async function query(filterBy = {}): Promise<Suggestions[]> {
-  const suggestions = (await storageService.query(STOARGE_KEY)) as Suggestions[]
+  const suggestions = (await storageService.query(STORAGE_KEY)) as Suggestions[]
   return suggestions
 }
 
-async function getSuggestionBy_id(suggestion_id: string) {
-  await storageService.get(STOARGE_KEY, suggestion_id)
+async function getSuggestionById(
+  productId: string | number
+): Promise<Suggestions['productRequests'][0] | null> {
+  const suggestions = (await storageService.query(STORAGE_KEY)) as Suggestions[]
+
+  for (const suggestion of suggestions) {
+    const productRequest = suggestion.productRequests.find(
+      (request) => request._id === productId
+    )
+    if (productRequest) {
+      return productRequest
+    }
+  }
+
+  return null
 }
 
-async function remove(suggestion_id: string) {
-  await storageService.remove(STOARGE_KEY, suggestion_id)
+async function remove(suggestionId: string | number) {
+  await storageService.remove(STORAGE_KEY, suggestionId)
 }
 
 async function saveSuggestion(suggestion: EntityWithId) {
   suggestion._id
-    ? await storageService.put(STOARGE_KEY, suggestion)
-    : await storageService.post(STOARGE_KEY, suggestion)
+    ? await storageService.put(STORAGE_KEY, suggestion)
+    : await storageService.post(STORAGE_KEY, suggestion)
 }
 
 const suggestions: Suggestions[] = [
@@ -388,4 +401,4 @@ const suggestions: Suggestions[] = [
     ],
   },
 ]
-localStorage.setItem(STOARGE_KEY, JSON.stringify(suggestions))
+localStorage.setItem(STORAGE_KEY, JSON.stringify(suggestions))

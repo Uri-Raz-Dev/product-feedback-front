@@ -3,6 +3,7 @@ import {
   ADD_SUGGESTION,
   REMOVE_SUGGESTION,
   SET_SIDEBAR,
+  SET_SUGGESTION,
   SET_SUGGESTIONS,
   UPDATE_SUGGESTION,
 } from '../reducers/suggestions.reducer'
@@ -19,6 +20,15 @@ export async function loadSuggestions() {
   }
 }
 
+export async function loadSuggestion(suggestionId: string) {
+  try {
+    const suggestion = await feedbackService.getSuggestionById(suggestionId)
+    store.dispatch({ type: SET_SUGGESTION, suggestion })
+  } catch (e) {
+    console.log((e as Error).message)
+    throw new Error("Couldn't load suggestion")
+  }
+}
 // export async function saveSuggestion() {
 //   const suggestion = store.getState().suggestionsModule.suggestionToEdit
 //   const type = suggestion._id ? UPDATE_SUGGESTION : ADD_SUGGESTION

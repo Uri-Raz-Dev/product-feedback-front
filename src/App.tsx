@@ -21,7 +21,7 @@ export function App() {
                 }
                 path='/'
               ></Route>
-              <Route element={<FeedbackDetail />} path='/feedback'></Route>
+              <Route element={<FeedbackDetail />} path='/feedback/:id'></Route>
             </Routes>
           </main>
         </section>

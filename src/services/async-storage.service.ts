@@ -7,7 +7,7 @@ export const storageService = {
 }
 
 export interface EntityWithId {
-  _id: string
+  _id: string | number
 }
 function query<T>(entityType: string, delay = 500): Promise<T[]> {
   const storedData = localStorage.getItem(entityType)
@@ -17,7 +17,7 @@ function query<T>(entityType: string, delay = 500): Promise<T[]> {
 
 async function get<Type extends EntityWithId>(
   entityType: string,
-  entityId: string
+  entityId: string | number
 ): Promise<Type> {
   try {
     const entities: Type[] = await query<Type>(entityType)
@@ -70,7 +70,7 @@ async function put<T extends EntityWithId>(
   }
 }
 
-async function remove(entityType: string, entityId: string) {
+async function remove(entityType: string, entityId: string | number) {
   try {
     const entities = (await query(entityType)) as EntityWithId[]
     const idx = entities.findIndex((entity) => entity._id === entityId)
