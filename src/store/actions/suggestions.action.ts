@@ -22,7 +22,9 @@ export async function loadSuggestions() {
 
 export async function loadSuggestion(suggestionId: string) {
   try {
-    const suggestion = await feedbackService.getSuggestionById(suggestionId)
+    const suggestion = await feedbackService.getSuggestionById(
+      Number(suggestionId)
+    )
     store.dispatch({ type: SET_SUGGESTION, suggestion })
   } catch (e) {
     console.log((e as Error).message)

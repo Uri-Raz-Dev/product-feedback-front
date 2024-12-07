@@ -1,0 +1,117 @@
+.comment-list {
+    border-radius: 10px;
+    background-color: white;
+    font-size: rem(13px);
+    padding: em(24px);
+
+
+    .comment::after {
+        content: '';
+        margin-block: rem(24px);
+        display: block;
+        height: rem(1px);
+        background-color: #647196;
+        opacity: 0.1;
+    }
+
+    .comment-open {
+
+
+
+
+        // .reply:first-child::before {
+        //     content: '';
+        //     position: relative;
+        //     transform: rotate(90deg);
+        //     right: 173px;
+        //     top: 150px;
+        //     display: flex;
+        //     height: rem(1px);
+        //     // width: 50%;
+        //     background-color: #647196;
+        //     opacity: 1.1;
+        // }
+    }
+
+    .comment-count {
+        margin-block-end: rem(24px);
+        color: $deepblue2;
+        font-size: rem(18px);
+        line-height: rem(26px);
+        letter-spacing: rem(-0.25px);
+        font-weight: 700;
+    }
+
+
+
+    p {
+        color: $deepblue3;
+        font-weight: 400;
+        text-wrap: pretty;
+    }
+
+    .comment-header {
+        display: flex;
+        align-items: center;
+
+        img {
+            border-radius: 100%;
+            width: rem(40px);
+            height: rem(40px);
+            margin-inline-end: rem(16px);
+        }
+
+        span {
+            color: $blue;
+            font-weight: 600;
+            line-height: rem(19px);
+        }
+    }
+
+
+    .comment-username-container {
+        flex-grow: 1;
+
+        :first-child {
+            font-size: rem(13px);
+            letter-spacing: -0.180556px;
+            font-weight: 700;
+            color: $deepblue2;
+        }
+
+        :nth-child(2) {
+            span {
+                font-size: rem(13px);
+                font-weight: 400;
+                line-height: rem(19px);
+                color: $deepblue3;
+            }
+
+            font-size: rem(13px);
+            font-weight: 400;
+            line-height: rem(19px);
+            color: $deepblue3;
+        }
+    }
+}
+
+.reply-container {
+    // width: 100%;
+    // display: flex;
+    // margin-inline-start: 24px;
+
+    .reply {
+        padding-inline-start: rem(23px);
+
+        p {
+            span {
+                font-weight: bold;
+                color: $purple;
+            }
+        }
+    }
+
+    .reply:first-of-type {
+        border-inline-start: rem(1px) solid rgb(100, 113, 150, 0.1);
+    }
+}
