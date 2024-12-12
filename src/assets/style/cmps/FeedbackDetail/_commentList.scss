@@ -11,27 +11,10 @@
         display: block;
         height: rem(1px);
         background-color: #647196;
-        opacity: 0.1;
+        opacity: 0.25;
     }
 
-    .comment-open {
 
-
-
-
-        // .reply:first-child::before {
-        //     content: '';
-        //     position: relative;
-        //     transform: rotate(90deg);
-        //     right: 173px;
-        //     top: 150px;
-        //     display: flex;
-        //     height: rem(1px);
-        //     // width: 50%;
-        //     background-color: #647196;
-        //     opacity: 1.1;
-        // }
-    }
 
     .comment-count {
         margin-block-end: rem(24px);
@@ -53,6 +36,7 @@
     .comment-header {
         display: flex;
         align-items: center;
+        margin-block-end: rem(16px);
 
         img {
             border-radius: 100%;
@@ -112,6 +96,6 @@
     }
 
     .reply:first-of-type {
-        border-inline-start: rem(1px) solid rgb(100, 113, 150, 0.1);
+        box-shadow: rem(-1px) 0px rgba(140, 146, 179, 0.25);
     }
 }
