@@ -6,6 +6,7 @@ import { loadSuggestion } from '../store/actions/suggestions.action'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/store'
 import SuggestionCard from '../cmps/SuggestionCard'
+import AddComment from '../cmps/AddComment'
 
 function FeedbackDetail() {
   const { id } = useParams()
@@ -24,6 +25,7 @@ function FeedbackDetail() {
       <FeedbackHeader />
       <SuggestionCard suggestion={suggestion} />
       <CommentsList suggestion={suggestion} />
+      <AddComment />
     </section>
   )
 }

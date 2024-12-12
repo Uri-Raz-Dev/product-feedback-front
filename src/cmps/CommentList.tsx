@@ -1,20 +1,27 @@
-import { useState } from 'react'
 import { suggestion } from './SuggestionCard'
+import CommentDetail from './CommentDetail'
+
+export type comments = {
+  _id: number
+  replies: replies[]
+  content: string
+  user: { image: string; name: string; username: string }
+}
+
+export type replies = {
+  content: string
+  replyingTo: string
+  user: {
+    image: string
+    name: string
+    username: string
+  }
+}
 
 function CommentList({ suggestion }: suggestion) {
   // console.log(suggestion)
 
-  type replies = {
-    content: string
-    replyingTo: string
-    user: {
-      image: string
-      name: string
-      username: string
-    }
-  }
-
-  const replies = suggestion.comments.map((comment) => {
+  const replies = suggestion.comments.flatMap((comment) => {
     return comment.replies
   })
 
@@ -22,53 +29,15 @@ function CommentList({ suggestion }: suggestion) {
     <>
       <ul className='comment-list'>
         <h2 className='comment-count'>
-          {suggestion.comments.length + replies.length} Comments
+          {suggestion.comments.length + replies.length - 1} Comments
         </h2>
-        {suggestion.comments.map((comment) => {
+        {suggestion.comments.map((comment: comments) => {
           return (
-            <li
-              className={comment.replies ? 'comment-open' : 'comment'}
+            <CommentDetail
               key={comment._id}
-            >
-              <section className='comment-header'>
-                <img src={comment.user.image} alt='user-image' />
-                <div className='comment-username-container'>
-                  <div>{comment.user.name}</div>
-                  <div>
-                    <span>@</span>
-                    {comment.user.username}
-                  </div>
-                </div>
-                <span>Reply</span>
-              </section>
-              <p>{comment.content}</p>
-              {comment.replies && (
-                <ul className='reply-container'>
-                  {comment.replies.map((reply: replies) => {
-                    return (
-                      <li className='reply' key={reply.user.username}>
-                        <section className='reply-header comment-header'>
-                          <img src={reply.user.image} alt='user-image' />
-                          <div className='comment-username-container reply-comment-container'>
-                            <div>{reply.user.name}</div>
-                            <div>
-                              <span>@</span>
-                              {reply.user.username}
-                            </div>
-                          </div>
-                          <span className='reply-button'>Reply</span>
-                        </section>
-
-                        <p>
-                          <span>@{reply.replyingTo} </span>
-                          {reply.content}
-                        </p>
-                      </li>
-                    )
-                  })}
-                </ul>
-              )}
-            </li>
+              comment={comment}
+              reply={comment.replies}
+            />
           )
         })}
       </ul>

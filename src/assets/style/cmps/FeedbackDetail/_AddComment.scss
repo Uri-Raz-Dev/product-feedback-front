@@ -1,0 +1,54 @@
+.add-comment {
+    background-color: $white1;
+    padding: rem(24px);
+    font-size: rem(13px);
+    margin-block-end: rem(80px);
+
+    h2 {
+        margin-block-end: rem(24px);
+        color: $deepblue2;
+        font-weight: bold;
+        font-size: rem(18px);
+        letter-spacing: -0.25px;
+    }
+
+    textarea {
+        width: 100%;
+        height: rem(100px);
+        border: 0;
+        border-radius: 10px;
+        padding-inline-start: rem(16px);
+        padding-block-start: rem(16px);
+        margin-block-end: rem(16px);
+        background-color: $white3;
+        resize: none;
+    }
+
+    textarea::placeholder {
+        color: $deepblue2;
+    }
+
+    textarea:focus {
+        outline: none;
+        border: 1px solid $blue;
+
+    }
+
+    .post-comment {
+        display: flex;
+        justify-content: space-between;
+
+        :first-child {
+            color: $deepblue3;
+        }
+
+        :nth-child(2) {
+            color: $white2;
+            font-weight: bold;
+            background-color: $purple;
+            border-radius: 10px;
+            padding-inline: rem(16px);
+            padding-block: rem(10.5px);
+        }
+    }
+}
