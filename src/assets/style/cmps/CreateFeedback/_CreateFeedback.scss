@@ -1,0 +1,127 @@
+.new-feedback-layout {
+    grid-template-rows: auto;
+    font-size: rem(13px);
+
+    .nav-back {
+        display: flex;
+        gap: rem(5px);
+        margin-block-start: rem(34px);
+        margin-block-end: rem(62px);
+
+        a {
+            font-weight: bold;
+            color: $deepblue3;
+        }
+    }
+
+    .circle {
+        position: absolute;
+        top: -28px;
+        left: 20px;
+
+    }
+
+}
+
+.feedback-form {
+    position: relative;
+    display: flex;
+    gap: rem(24px);
+    justify-content: space-between;
+    flex-direction: column;
+    padding: rem(24px);
+    border-radius: rem(10px);
+    background-color: $white1;
+    margin-block-end: rem(80px);
+
+
+    textarea {
+        width: 100%;
+        height: rem(48px);
+        border: 0;
+        border-radius: 10px;
+        padding-inline-start: rem(16px);
+        padding-block-start: rem(16px);
+        // margin-block-end: rem(16px);
+        background-color: $white3;
+        resize: none;
+    }
+
+    #feedback-detail {
+        height: rem(120px);
+    }
+
+    textarea::placeholder {
+        color: $deepblue2;
+    }
+
+    textarea:focus {
+        outline: none;
+        border: 1px solid $blue;
+    }
+
+
+    .new-feedback-header {
+        font-size: rem(18px);
+        margin-block-end: rem(24px);
+
+    }
+
+    h3 {
+        margin-block-end: rem(3px);
+        font-size: rem(13px);
+    }
+
+    textarea,
+    .category-dropdown-container {
+        margin-block-start: rem(16px);
+    }
+
+    .new-feedback-header,
+    h3 {
+        color: $deepblue2;
+    }
+
+    .sub-header {
+        color: $deepblue3;
+    }
+}
+
+.feedback-title-container {
+    margin-block-start: rem(20px);
+}
+
+.category-container {
+    .category-dropdown-container {
+        display: flex;
+        padding: rem(14px);
+        justify-content: space-between;
+        background-color: $white3;
+        border-radius: rem(10px);
+    }
+}
+
+.feedback-btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: rem(16px);
+    margin-block-start: rem(40px);
+
+    >* {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: rem(40px);
+        color: $white2;
+        font-weight: bold;
+        border-radius: rem(10px);
+    }
+
+    :first-child {
+        background-color: $purple ;
+    }
+
+    :last-child {
+        background-color: $deepblue2;
+    }
+}

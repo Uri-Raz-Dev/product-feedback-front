@@ -1,5 +1,3 @@
-import { link } from 'fs'
-
 function AddComment() {
   return (
     <section className='add-comment'>

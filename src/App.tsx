@@ -4,6 +4,7 @@ import AppHeader from './cmps/AppHeader'
 import { store } from './store/store'
 import Suggestions from './pages/Suggestions'
 import FeedbackDetail from './pages/FeedbackDetail'
+import NewFeedback from './pages/NewFeedback'
 
 export function App() {
   return (
@@ -22,6 +23,7 @@ export function App() {
                 path='/'
               ></Route>
               <Route element={<FeedbackDetail />} path='/feedback/:id'></Route>
+              <Route element={<NewFeedback />} path='/create_feedback/'></Route>
             </Routes>
           </main>
         </section>
