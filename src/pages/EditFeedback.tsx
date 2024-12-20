@@ -36,7 +36,7 @@ function EditFeedback() {
       <div className='feedback-form '>
         <section className='feedback-title-container'>
           <span className='circle'>
-            <SvgIcon iconName='newFeedback' />
+            <SvgIcon iconName='editFeedback' />
           </span>
           <h2 className='new-feedback-header'>{suggestion.title}</h2>
           <h3>Feedback Title</h3>
