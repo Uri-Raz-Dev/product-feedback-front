@@ -5,6 +5,7 @@ import { store } from './store/store'
 import Suggestions from './pages/Suggestions'
 import FeedbackDetail from './pages/FeedbackDetail'
 import NewFeedback from './pages/NewFeedback'
+import EditFeedback from './pages/EditFeedback'
 
 export function App() {
   return (
@@ -24,6 +25,10 @@ export function App() {
               ></Route>
               <Route element={<FeedbackDetail />} path='/feedback/:id'></Route>
               <Route element={<NewFeedback />} path='/create_feedback/'></Route>
+              <Route
+                element={<EditFeedback />}
+                path='/edit_feedback/:id'
+              ></Route>
             </Routes>
           </main>
         </section>
