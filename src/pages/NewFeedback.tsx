@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom'
 import { SvgIcon } from '../cmps/Svgicon'
+import NavBack from '../cmps/NavBack'
 
 function NewFeedback() {
   return (
     <div className='new-feedback-layout'>
-      <span className='nav-back'>
-        <SvgIcon iconName='arrowLeft' />
-        <Link to={'/'}>Go Back</Link>
-      </span>
+      <NavBack />
       <div className='feedback-form '>
         <section className='feedback-title-container'>
           <span className='circle'>

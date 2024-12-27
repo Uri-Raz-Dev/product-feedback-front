@@ -3,9 +3,8 @@ import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { loadSuggestion } from '../store/actions/suggestions.action'
 import { RootState } from '../store/store'
-import { layouts } from 'chart.js'
 import { SvgIcon } from '../cmps/Svgicon'
-import { log } from 'console'
+import NavBack from '../cmps/NavBack'
 
 function EditFeedback() {
   const { id } = useParams()
@@ -29,10 +28,7 @@ function EditFeedback() {
 
   return (
     <div className='edit-feedback-layout'>
-      <span className='nav-back'>
-        <SvgIcon iconName='arrowLeft' />
-        <Link to={'/'}>Go Back</Link>
-      </span>
+      <NavBack />
       <div className='feedback-form '>
         <section className='feedback-title-container'>
           <span className='circle'>

@@ -6,6 +6,7 @@ import Suggestions from './pages/Suggestions'
 import FeedbackDetail from './pages/FeedbackDetail'
 import NewFeedback from './pages/NewFeedback'
 import EditFeedback from './pages/EditFeedback'
+import Roadmap from './pages/Roadmap'
 
 export function App() {
   return (
@@ -29,6 +30,7 @@ export function App() {
                 element={<EditFeedback />}
                 path='/edit_feedback/:id'
               ></Route>
+              <Route element={<Roadmap />} path='/roadmap'></Route>
             </Routes>
           </main>
         </section>
