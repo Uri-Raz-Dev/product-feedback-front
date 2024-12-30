@@ -1,4 +1,7 @@
-import { feedbackService } from '../../services/feedback.service.local'
+import {
+  feedbackService,
+  FilterBy,
+} from '../../services/feedback.service.local'
 import {
   ADD_SUGGESTION,
   REMOVE_SUGGESTION,
@@ -9,10 +12,10 @@ import {
 } from '../reducers/suggestions.reducer'
 import { store } from '../store'
 
-export async function loadSuggestions() {
+export async function loadSuggestions(filterBy: FilterBy = {}) {
   //ADD PAGE INDEX
   try {
-    const suggestions = await feedbackService.query()
+    const suggestions = await feedbackService.query(filterBy)
     store.dispatch({ type: SET_SUGGESTIONS, suggestions })
   } catch (e) {
     console.log((e as Error).message)
@@ -31,20 +34,6 @@ export async function loadSuggestion(suggestionId: string) {
     throw new Error("Couldn't load suggestion")
   }
 }
-// export async function saveSuggestion() {
-//   const suggestion = store.getState().suggestionsModule.suggestionToEdit
-//   const type = suggestion._id ? UPDATE_SUGGESTION : ADD_SUGGESTION
-
-//   try {
-//     const savedSuggestion = await feedbackService.saveSuggestion(suggestion)
-//     store.dispatch({ type, suggestion: savedSuggestion })
-//   } catch (e) {
-//     console.error((e as Error).message)
-//     throw new Error(
-//       suggestion._id ? "Couldn't update product" : "Couldn't add product"
-//     )
-//   }
-// }
 
 export async function removeSuggestion(suggestionId: string) {
   try {

@@ -30,6 +30,13 @@ export interface Suggestions {
   }[]
 }
 
+export interface FilterBy {
+  mostupvotes?: boolean
+  leastupvotes?: boolean
+  mostcomments?: boolean
+  leastcomments?: boolean
+}
+
 export const feedbackService = {
   query,
   getSuggestionById,
@@ -37,8 +44,48 @@ export const feedbackService = {
   saveSuggestion,
 }
 
-async function query(filterBy = {}): Promise<Suggestions[]> {
-  const suggestions = (await storageService.query(STORAGE_KEY)) as Suggestions[]
+async function query(filterBy: FilterBy = {}): Promise<Suggestions[]> {
+  let suggestions = (await storageService.query(STORAGE_KEY)) as Suggestions[]
+  const { mostupvotes, leastupvotes, mostcomments, leastcomments } = filterBy
+
+  if (mostupvotes) {
+    suggestions = suggestions.map((suggestion) => {
+      suggestion.productRequests = suggestion.productRequests.sort(
+        (requestA, requestB) => requestB.upvotes - requestA.upvotes
+      )
+      return suggestion
+    })
+  } else if (leastupvotes) {
+    suggestions = suggestions.map((suggestion) => {
+      suggestion.productRequests = suggestion.productRequests.sort(
+        (requestA, requestB) => requestA.upvotes - requestB.upvotes
+      )
+      return suggestion
+    })
+  } else if (mostcomments) {
+    suggestions = suggestions.map((suggestion) => {
+      suggestion.productRequests = suggestion.productRequests.sort(
+        (requestA, requestB) => {
+          const commentsA = requestA.comments?.length || 0
+          const commentsB = requestB.comments?.length || 0
+          return commentsB - commentsA
+        }
+      )
+      return suggestion
+    })
+  } else if (leastcomments) {
+    suggestions = suggestions.map((suggestion) => {
+      suggestion.productRequests = suggestion.productRequests.sort(
+        (requestA, requestB) => {
+          const commentsA = requestA.comments?.length || 0
+          const commentsB = requestB.comments?.length || 0
+          return commentsA - commentsB
+        }
+      )
+      return suggestion
+    })
+  }
+
   return suggestions
 }
 

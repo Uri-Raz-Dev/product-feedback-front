@@ -14,7 +14,8 @@ function Suggestions(): JSX.Element {
     (state: RootState) => state.suggestionsModule.sidebar
   )
   useEffect(() => {
-    loadSuggestions()
+    const defaultFilterBy = { mostupvotes: true }
+    loadSuggestions(defaultFilterBy)
   }, [])
 
   console.log(suggestions)
@@ -27,11 +28,21 @@ function Suggestions(): JSX.Element {
     'Feature',
   ]
 
+  function handleSortChange(sortType: string) {
+    const filterBy: any = {}
+    if (sortType === 'Most Upvotes') filterBy.mostupvotes = true
+    if (sortType === 'Least Upvotes') filterBy.leastupvotes = true
+    if (sortType === 'Most Comments') filterBy.mostcomments = true
+    if (sortType === 'Least Comments') filterBy.leastcomments = true
+
+    loadSuggestions(filterBy)
+  }
+
   return (
     <div className='suggestions-layout full main-layout'>
       <section className='feedback-menu-layout full main-layout '>
         <div className='feedback-menu'>
-          <SortBy />
+          <SortBy handlesortchange={handleSortChange} />
           <AddFeedback />
         </div>
       </section>
