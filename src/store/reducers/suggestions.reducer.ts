@@ -13,6 +13,12 @@ type SuggestionsState = {
   suggestions: Suggestions[]
   sidebar: boolean
   suggestion: null
+  filterBy: {
+    mostupvotes: boolean
+    leastupvotes: boolean
+    mostcomments: boolean
+    leastcomments: boolean
+  }
 }
 
 type ReducerAction = {
@@ -22,12 +28,24 @@ type ReducerAction = {
   suggestionToEdit?: Suggestions
   suggestionId?: string
   sidebar?: boolean
+  filterBy?: {
+    mostupvotes?: boolean
+    leastupvotes?: boolean
+    mostcomments?: boolean
+    leastcomments?: boolean
+  }
 }
 
 const initialState: SuggestionsState = {
   suggestions: [],
   sidebar: false,
   suggestion: null,
+  filterBy: {
+    mostupvotes: true,
+    leastupvotes: true,
+    mostcomments: true,
+    leastcomments: true,
+  },
 }
 export function suggestionsReducer(
   state = initialState,
@@ -72,8 +90,8 @@ export function suggestionsReducer(
     case SET_SIDEBAR:
       return { ...state, sidebar: action.sidebar! }
     //TODO: ADD FILTERBY
-    // case SET_FILTER_BY:
-    //   return { ...state, filterBy: action.filterBy }
+    case SET_FILTER_BY:
+      return { ...state, filterBy: action.filterBy }
 
     default:
       return state

@@ -5,6 +5,7 @@ import {
 import {
   ADD_SUGGESTION,
   REMOVE_SUGGESTION,
+  SET_FILTER_BY,
   SET_SIDEBAR,
   SET_SUGGESTION,
   SET_SUGGESTIONS,
@@ -47,4 +48,8 @@ export async function removeSuggestion(suggestionId: string) {
 
 export function setSideBar(sidebar = false) {
   return store.dispatch({ type: SET_SIDEBAR, sidebar })
+}
+
+export function setFilterBy(filterBy: FilterBy) {
+  store.dispatch({ type: SET_FILTER_BY, filterBy })
 }

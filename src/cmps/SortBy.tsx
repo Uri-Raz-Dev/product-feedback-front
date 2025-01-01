@@ -4,13 +4,13 @@ interface SortByProps {
   handlesortchange: (sortType: string) => void
 }
 function SortBy({ handlesortchange }: SortByProps): JSX.Element {
-  const [isOpen, setIsOpen] = useState(false) // State to toggle dropdown visibility
-  const [selected, setSelected] = useState('Most Upvotes') // State to track selected option
+  const [isOpen, setIsOpen] = useState(false)
+  const [selected, setSelected] = useState('Most Upvotes')
   const dropdownRef = useRef<HTMLDivElement>(null)
   const handleOptionClick = (option: string) => {
-    setSelected(option) // Update selected option
-    handlesortchange(option) // Call parent handler with selected option
-    setIsOpen(false) // Close dropdown
+    setSelected(option)
+    handlesortchange(option)
+    setIsOpen(false)
   }
 
   useEffect(() => {

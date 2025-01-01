@@ -13,10 +13,13 @@ function Suggestions(): JSX.Element {
   const sidebar = useSelector(
     (state: RootState) => state.suggestionsModule.sidebar
   )
+
+  const filterBy = useSelector(
+    (state: RootState) => state.suggestionsModule.filterBy
+  )
   useEffect(() => {
-    const defaultFilterBy = { mostupvotes: true }
-    loadSuggestions(defaultFilterBy)
-  }, [])
+    loadSuggestions(filterBy)
+  }, [filterBy])
 
   console.log(suggestions)
   const categories: string[] = [
