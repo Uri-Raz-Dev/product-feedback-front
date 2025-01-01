@@ -6,6 +6,7 @@ export const REMOVE_SUGGESTION = 'REMOVE_SUGGESTION'
 export const ADD_SUGGESTION = 'ADD_SUGGESTION'
 export const UPDATE_SUGGESTION = 'UPDATE_SUGGESTION'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
+export const SET_SORT_BY = 'SET_SORT_BY'
 export const EDIT_SUGGESTION = 'EDIT_SUGGESTION'
 export const SET_SIDEBAR = 'SET_SIDEBAR'
 
@@ -13,17 +14,19 @@ type SuggestionsState = {
   suggestions: Suggestions[]
   sidebar: boolean
   suggestion: null
-  filterBy: {
-    mostupvotes: boolean
-    leastupvotes: boolean
-    mostcomments: boolean
-    leastcomments: boolean
+  filterBy?: {
     ALL?: boolean
     UI?: boolean
     UX?: boolean
     Enhancement?: boolean
     Bug?: boolean
     Feature?: boolean
+  }
+  sortBy?: {
+    mostupvotes?: boolean
+    leastupvotes?: boolean
+    mostcomments?: boolean
+    leastcomments?: boolean
   }
 }
 
@@ -35,16 +38,18 @@ type ReducerAction = {
   suggestionId?: string
   sidebar?: boolean
   filterBy?: {
-    mostupvotes?: boolean
-    leastupvotes?: boolean
-    mostcomments?: boolean
-    leastcomments?: boolean
     ALL?: boolean
     UI?: boolean
     UX?: boolean
     Enhancement?: boolean
     Bug?: boolean
     Feature?: boolean
+  }
+  sortBy?: {
+    mostupvotes?: boolean
+    leastupvotes?: boolean
+    mostcomments?: boolean
+    leastcomments?: boolean
   }
 }
 
@@ -53,16 +58,18 @@ const initialState: SuggestionsState = {
   sidebar: false,
   suggestion: null,
   filterBy: {
-    mostupvotes: true,
-    leastupvotes: true,
-    mostcomments: true,
-    leastcomments: true,
     ALL: true,
     UI: true,
     UX: true,
     Enhancement: true,
     Bug: true,
     Feature: true,
+  },
+  sortBy: {
+    mostupvotes: true,
+    leastupvotes: true,
+    mostcomments: true,
+    leastcomments: true,
   },
 }
 export function suggestionsReducer(
@@ -110,6 +117,8 @@ export function suggestionsReducer(
     //TODO: ADD FILTERBY
     case SET_FILTER_BY:
       return { ...state, filterBy: action.filterBy }
+    case SET_SORT_BY:
+      return { ...state, sortBy: action.sortBy }
 
     default:
       return state

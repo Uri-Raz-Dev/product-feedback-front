@@ -1,12 +1,16 @@
 import { useEffect } from 'react'
 import AddFeedback from '../cmps/AddFeedback'
-import SortBy from '../cmps/SortBy'
 import SuggestionsList from '../cmps/SuggestionsList'
-import { loadSuggestions } from '../store/actions/suggestions.action'
+import {
+  loadSuggestions,
+  setFilterBy,
+  setSortBy,
+} from '../store/actions/suggestions.action'
 import { RootState } from '../store/store'
 import { useSelector } from 'react-redux'
 import Sidebar from '../cmps/Sidebar'
-import { FilterBy } from '../services/feedback.service.local'
+import { FilterBy, SortBy } from '../services/feedback.service.local'
+import SortByDropdown from '../cmps/SortBy'
 
 function Suggestions(): JSX.Element {
   const suggestions = useSelector(
@@ -19,9 +23,13 @@ function Suggestions(): JSX.Element {
   const filterBy = useSelector(
     (state: RootState) => state.suggestionsModule.filterBy
   )
+
+  const sortBy = useSelector(
+    (state: RootState) => state.suggestionsModule.sortBy
+  )
   useEffect(() => {
-    loadSuggestions(filterBy)
-  }, [filterBy])
+    loadSuggestions(filterBy, sortBy)
+  }, [filterBy, sortBy])
 
   console.log(suggestions)
   const categories: string[] = [
@@ -43,26 +51,25 @@ function Suggestions(): JSX.Element {
       Feature: { Feature: true },
     }
 
-    const filterBy = categoryMapping[categoryType] || {}
-    loadSuggestions(filterBy)
+    setFilterBy(categoryMapping[categoryType])
   }
+
   function handleSortChange(sortType: string) {
-    const sortMapping: Record<string, FilterBy> = {
+    const sortMapping: Record<string, SortBy> = {
       'Most Upvotes': { mostupvotes: true },
       'Least Upvotes': { leastupvotes: true },
       'Most Comments': { mostcomments: true },
       'Least Comments': { leastcomments: true },
     }
 
-    const filterBy = sortMapping[sortType] || {}
-    loadSuggestions(filterBy)
+    setSortBy(sortMapping[sortType])
   }
 
   return (
     <div className='suggestions-layout full main-layout'>
       <section className='feedback-menu-layout full main-layout '>
         <div className='feedback-menu'>
-          <SortBy handlesortchange={handleSortChange} />
+          <SortByDropdown handlesortchange={handleSortChange} />
           <AddFeedback />
         </div>
       </section>

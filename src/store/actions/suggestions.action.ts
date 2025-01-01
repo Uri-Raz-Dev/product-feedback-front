@@ -1,22 +1,27 @@
 import {
   feedbackService,
   FilterBy,
+  SortBy,
 } from '../../services/feedback.service.local'
 import {
   ADD_SUGGESTION,
   REMOVE_SUGGESTION,
   SET_FILTER_BY,
   SET_SIDEBAR,
+  SET_SORT_BY,
   SET_SUGGESTION,
   SET_SUGGESTIONS,
   UPDATE_SUGGESTION,
 } from '../reducers/suggestions.reducer'
 import { store } from '../store'
 
-export async function loadSuggestions(filterBy: FilterBy = {}) {
+export async function loadSuggestions(
+  filterBy: FilterBy = {},
+  sortBy: SortBy = {}
+) {
   //ADD PAGE INDEX
   try {
-    const suggestions = await feedbackService.query(filterBy)
+    const suggestions = await feedbackService.query(filterBy, sortBy)
     store.dispatch({ type: SET_SUGGESTIONS, suggestions })
   } catch (e) {
     console.log((e as Error).message)
@@ -52,4 +57,7 @@ export function setSideBar(sidebar = false) {
 
 export function setFilterBy(filterBy: FilterBy) {
   store.dispatch({ type: SET_FILTER_BY, filterBy })
+}
+export function setSortBy(sortBy: SortBy) {
+  store.dispatch({ type: SET_SORT_BY, sortBy })
 }

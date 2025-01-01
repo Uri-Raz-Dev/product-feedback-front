@@ -32,16 +32,19 @@ export interface Suggestions {
 }
 
 export interface FilterBy {
-  mostupvotes?: boolean
-  leastupvotes?: boolean
-  mostcomments?: boolean
-  leastcomments?: boolean
   ALL?: boolean
   UI?: boolean
   UX?: boolean
   Enhancement?: boolean
   Bug?: boolean
   Feature?: boolean
+}
+
+export interface SortBy {
+  mostupvotes?: boolean
+  leastupvotes?: boolean
+  mostcomments?: boolean
+  leastcomments?: boolean
 }
 
 export const feedbackService = {
@@ -51,20 +54,14 @@ export const feedbackService = {
   saveSuggestion,
 }
 
-async function query(filterBy: FilterBy = {}): Promise<Suggestions[]> {
+async function query(
+  filterBy: FilterBy = {},
+  sortBy: SortBy = {}
+): Promise<Suggestions[]> {
   let suggestions = (await storageService.query(STORAGE_KEY)) as Suggestions[]
-  const {
-    mostupvotes,
-    leastupvotes,
-    mostcomments,
-    leastcomments,
-    ALL,
-    UI,
-    UX,
-    Enhancement,
-    Bug,
-    Feature,
-  } = filterBy
+  const { mostupvotes, leastupvotes, mostcomments, leastcomments } = sortBy
+
+  const { ALL, UI, UX, Enhancement, Bug, Feature } = filterBy
 
   if (mostupvotes) {
     suggestions = suggestions.map((suggestion) => {

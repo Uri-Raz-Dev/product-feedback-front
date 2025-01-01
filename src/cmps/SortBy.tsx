@@ -3,7 +3,7 @@ import { SvgIcon } from './Svgicon'
 interface SortByProps {
   handlesortchange: (sortType: string) => void
 }
-function SortBy({ handlesortchange }: SortByProps): JSX.Element {
+function SortByDropdown({ handlesortchange }: SortByProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState('Most Upvotes')
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -71,4 +71,4 @@ function SortBy({ handlesortchange }: SortByProps): JSX.Element {
   )
 }
 
-export default SortBy
+export default SortByDropdown
