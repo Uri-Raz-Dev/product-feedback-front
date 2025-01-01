@@ -18,6 +18,12 @@ type SuggestionsState = {
     leastupvotes: boolean
     mostcomments: boolean
     leastcomments: boolean
+    ALL?: boolean
+    UI?: boolean
+    UX?: boolean
+    Enhancement?: boolean
+    Bug?: boolean
+    Feature?: boolean
   }
 }
 
@@ -33,6 +39,12 @@ type ReducerAction = {
     leastupvotes?: boolean
     mostcomments?: boolean
     leastcomments?: boolean
+    ALL?: boolean
+    UI?: boolean
+    UX?: boolean
+    Enhancement?: boolean
+    Bug?: boolean
+    Feature?: boolean
   }
 }
 
@@ -45,6 +57,12 @@ const initialState: SuggestionsState = {
     leastupvotes: true,
     mostcomments: true,
     leastcomments: true,
+    ALL: true,
+    UI: true,
+    UX: true,
+    Enhancement: true,
+    Bug: true,
+    Feature: true,
   },
 }
 export function suggestionsReducer(

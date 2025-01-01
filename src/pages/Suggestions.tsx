@@ -6,6 +6,8 @@ import { loadSuggestions } from '../store/actions/suggestions.action'
 import { RootState } from '../store/store'
 import { useSelector } from 'react-redux'
 import Sidebar from '../cmps/Sidebar'
+import { FilterBy } from '../services/feedback.service.local'
+
 function Suggestions(): JSX.Element {
   const suggestions = useSelector(
     (state: RootState) => state.suggestionsModule.suggestions
@@ -31,13 +33,28 @@ function Suggestions(): JSX.Element {
     'Feature',
   ]
 
-  function handleSortChange(sortType: string) {
-    const filterBy: any = {}
-    if (sortType === 'Most Upvotes') filterBy.mostupvotes = true
-    if (sortType === 'Least Upvotes') filterBy.leastupvotes = true
-    if (sortType === 'Most Comments') filterBy.mostcomments = true
-    if (sortType === 'Least Comments') filterBy.leastcomments = true
+  function handleCategoryChange(categoryType: string) {
+    const categoryMapping: Record<string, FilterBy> = {
+      ALL: { ALL: true },
+      UI: { UI: true },
+      UX: { UX: true },
+      Enhancement: { Enhancement: true },
+      Bug: { Bug: true },
+      Feature: { Feature: true },
+    }
 
+    const filterBy = categoryMapping[categoryType] || {}
+    loadSuggestions(filterBy)
+  }
+  function handleSortChange(sortType: string) {
+    const sortMapping: Record<string, FilterBy> = {
+      'Most Upvotes': { mostupvotes: true },
+      'Least Upvotes': { leastupvotes: true },
+      'Most Comments': { mostcomments: true },
+      'Least Comments': { leastcomments: true },
+    }
+
+    const filterBy = sortMapping[sortType] || {}
     loadSuggestions(filterBy)
   }
 
@@ -50,7 +67,11 @@ function Suggestions(): JSX.Element {
         </div>
       </section>
       <SuggestionsList suggestions={suggestions} />
-      <Sidebar categories={categories} sidebar={sidebar} />
+      <Sidebar
+        categories={categories}
+        sidebar={sidebar}
+        handlecategorychange={handleCategoryChange}
+      />
     </div>
   )
 }

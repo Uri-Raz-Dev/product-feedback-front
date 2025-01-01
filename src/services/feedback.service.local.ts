@@ -1,3 +1,4 @@
+import { it } from 'node:test'
 import { EntityWithId, storageService } from './async-storage.service'
 
 const STORAGE_KEY = 'suggestions'
@@ -35,6 +36,12 @@ export interface FilterBy {
   leastupvotes?: boolean
   mostcomments?: boolean
   leastcomments?: boolean
+  ALL?: boolean
+  UI?: boolean
+  UX?: boolean
+  Enhancement?: boolean
+  Bug?: boolean
+  Feature?: boolean
 }
 
 export const feedbackService = {
@@ -46,7 +53,18 @@ export const feedbackService = {
 
 async function query(filterBy: FilterBy = {}): Promise<Suggestions[]> {
   let suggestions = (await storageService.query(STORAGE_KEY)) as Suggestions[]
-  const { mostupvotes, leastupvotes, mostcomments, leastcomments } = filterBy
+  const {
+    mostupvotes,
+    leastupvotes,
+    mostcomments,
+    leastcomments,
+    ALL,
+    UI,
+    UX,
+    Enhancement,
+    Bug,
+    Feature,
+  } = filterBy
 
   if (mostupvotes) {
     suggestions = suggestions.map((suggestion) => {
@@ -84,6 +102,24 @@ async function query(filterBy: FilterBy = {}): Promise<Suggestions[]> {
       )
       return suggestion
     })
+  }
+
+  if (!ALL) {
+    const activeCategories: string[] = []
+    if (UI) activeCategories.push('UI')
+    if (UX) activeCategories.push('UX')
+    if (Bug) activeCategories.push('bug')
+    if (Enhancement) activeCategories.push('enhancement')
+    if (Feature) activeCategories.push('feature')
+
+    if (activeCategories.length > 0) {
+      suggestions = suggestions.map((suggestion) => {
+        suggestion.productRequests = suggestion.productRequests.filter((item) =>
+          activeCategories.includes(item.category)
+        )
+        return suggestion
+      })
+    }
   }
 
   return suggestions

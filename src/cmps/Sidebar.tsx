@@ -1,11 +1,27 @@
 import { Link } from 'react-router-dom'
 import { setSideBar } from '../store/actions/suggestions.action'
+import { useState } from 'react'
 
 type Categories = {
   categories: string[]
   sidebar: boolean
 }
-function Sidebar({ categories, sidebar }: Categories): JSX.Element {
+
+interface FilterByCategories {
+  handlecategorychange: (cateforyType: string) => void
+}
+function Sidebar({
+  categories,
+  sidebar,
+  handlecategorychange,
+}: Categories & FilterByCategories): JSX.Element {
+  const [selected, setSelected] = useState('ALL')
+
+  function handleCategoryClick(option: string) {
+    setSelected(option)
+    handlecategorychange(option)
+  }
+
   return (
     <>
       <div
@@ -15,8 +31,12 @@ function Sidebar({ categories, sidebar }: Categories): JSX.Element {
       <aside className={sidebar ? 'sidebar open' : 'sidebar'}>
         <section className='categories'>
           <ul className='category-list'>
-            {categories.map((category, idx) => {
-              return <li key={idx}>{category}</li>
+            {categories.map((option) => {
+              return (
+                <li onClick={() => handleCategoryClick(option)} key={option}>
+                  {option}
+                </li>
+              )
             })}
           </ul>
         </section>
