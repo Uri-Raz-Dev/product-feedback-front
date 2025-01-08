@@ -7,6 +7,7 @@ import { suggestionsReducer } from './reducers/suggestions.reducer'
 
 const rootReducer = combineReducers({
   suggestionsModule: suggestionsReducer,
+  userModule: userReducer,
 })
 
 declare global {

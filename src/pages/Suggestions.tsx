@@ -78,6 +78,7 @@ function Suggestions(): JSX.Element {
         categories={categories}
         sidebar={sidebar}
         handlecategorychange={handleCategoryChange}
+        suggestions={suggestions}
       />
     </div>
   )
