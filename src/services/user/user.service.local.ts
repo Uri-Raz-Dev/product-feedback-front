@@ -16,6 +16,14 @@ export interface UserCred {
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
+export const userService = {
+  getUsers,
+  getById,
+  remove,
+  getLoggedinUser,
+  login,
+}
+
 async function getUsers(): Promise<User[]> {
   const users = await storageService.query<User>('user')
   return users.map((user: User) => {
