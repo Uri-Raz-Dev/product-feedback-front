@@ -1,3 +1,4 @@
+import { EntityWithId } from '../../services/async-storage.service'
 import {
   feedbackService,
   FilterBy,
@@ -48,6 +49,20 @@ export async function removeSuggestion(suggestionId: string) {
   } catch (e) {
     console.log((e as Error).message)
     throw new Error("Couldn't load suggestions")
+  }
+}
+
+export async function saveSuggestion(suggestion: any) {
+  try {
+    const newSuggestion = await feedbackService.saveSuggestion(suggestion)
+    if (suggestion._id) {
+      store.dispatch({ type: UPDATE_SUGGESTION, suggestion: newSuggestion })
+    } else {
+      store.dispatch({ type: ADD_SUGGESTION, suggestion: newSuggestion })
+    }
+  } catch (e) {
+    console.log((e as Error).message)
+    throw new Error("Couldn't add suggestion")
   }
 }
 

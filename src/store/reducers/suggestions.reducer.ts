@@ -88,14 +88,14 @@ export function suggestionsReducer(
         suggestions: [...state.suggestions, action.suggestion!],
       }
     case UPDATE_SUGGESTION:
-      const suggestion = state.suggestions.map((suggestion: Suggestions) => {
-        const hasMatchingProductRequest = suggestion.productRequests.some(
+      const updatedSuggestions = state.suggestions.map((sug: Suggestions) => {
+        const hasMatchingProductRequest = sug.productRequests.some(
           (productRequest) => productRequest._id === action.suggestionId
         )
 
-        return hasMatchingProductRequest ? action.suggestion! : suggestion
+        return hasMatchingProductRequest ? action.suggestion! : sug
       })
-      return { ...state, suggestion }
+      return { ...state, suggestions: updatedSuggestions }
 
     case REMOVE_SUGGESTION:
       const suggestions = state.suggestions.filter(

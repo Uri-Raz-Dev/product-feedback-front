@@ -1,5 +1,6 @@
 import { it } from 'node:test'
 import { EntityWithId, storageService } from './async-storage.service'
+import { utilService } from './util.service'
 
 const STORAGE_KEY = 'suggestions'
 
@@ -139,14 +140,26 @@ async function getSuggestionById(
   return null
 }
 
-async function remove(suggestionId: string | number) {
-  await storageService.remove(STORAGE_KEY, suggestionId)
-}
-
+export function remove(suggestion: any) {}
 async function saveSuggestion(suggestion: EntityWithId) {
-  suggestion._id
-    ? await storageService.put(STORAGE_KEY, suggestion)
-    : await storageService.post(STORAGE_KEY, suggestion)
+  // 1. Load the single "Suggestions" object (the first or only)
+  //    For example, maybe it’s something like:
+  //      [ { currentUser: {...}, productRequests: [...] } ]
+  const [existingSuggestions] = await storageService.query(STORAGE_KEY)
+
+  // 2. Push the new suggestion into productRequests
+  if (!existingSuggestions.productRequests) {
+    existingSuggestions.productRequests = []
+  }
+  // If `_id` is missing, generate one or handle that logic
+  suggestion._id = suggestion._id || utilService.makeId()
+  existingSuggestions.productRequests.push(suggestion)
+
+  // 3. Save back to storage
+  await storageService.put(STORAGE_KEY, [existingSuggestions])
+
+  // 4. Return the newly added suggestion (or the entire updated object)
+  return suggestion
 }
 
 const suggestions: Suggestions[] = [

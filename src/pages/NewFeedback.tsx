@@ -1,8 +1,40 @@
 import { Link } from 'react-router-dom'
 import { SvgIcon } from '../cmps/Svgicon'
 import NavBack from '../cmps/NavBack'
+import { useState } from 'react'
+import { saveSuggestion } from '../store/actions/suggestions.action'
 
 function NewFeedback() {
+  const [feedbackData, setFeedbackData] = useState({
+    title: '',
+    description: '',
+    status: 'live',
+    category: 'feature',
+    upvotes: 0,
+    comments: [],
+  })
+  function handleChange({ target }: any) {
+    let value = target.value
+    const field = target.name
+    switch (target.type) {
+      case 'number':
+        value = +value
+        break
+      case 'checkbox':
+        value = target.checked
+        break
+      default:
+        break
+    }
+    setFeedbackData((prevFeedback) => ({
+      ...prevFeedback,
+      [field]: value,
+    }))
+  }
+  function onSubmit() {
+    saveSuggestion(feedbackData)
+    console.log('Feedback submitted:', feedbackData)
+  }
   return (
     <div className='new-feedback-layout'>
       <NavBack />
@@ -14,7 +46,12 @@ function NewFeedback() {
           <h2 className='new-feedback-header'>Create New Feedback</h2>
           <h3>Feedback Title</h3>
           <div className='sub-header'>Add a short, descriptive headilne</div>
-          <textarea name='feedback-title' id='feedback-title'></textarea>
+          <textarea
+            onChange={handleChange}
+            name='title'
+            id='feedback-title'
+            value={feedbackData.title}
+          ></textarea>
         </section>
 
         <section className='category-container'>
@@ -31,9 +68,16 @@ function NewFeedback() {
           <div className='sub-header'>
             Include any specific comments on what should be improved,added,etc.
           </div>
-          <textarea name='feedback-detail' id='feedback-detail'></textarea>
+          <textarea
+            onChange={handleChange}
+            name='description'
+            id='feedback-detail'
+            value={feedbackData.description}
+          ></textarea>
           <div className='feedback-btn-container'>
-            <Link to={'/'}>Add Feedback</Link>
+            <Link to={'/'} onClick={onSubmit}>
+              Add Feedback
+            </Link>
             <span>Cancel</span>
           </div>
         </section>

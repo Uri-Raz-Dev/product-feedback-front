@@ -3,7 +3,7 @@ import { SvgIcon } from './Svgicon'
 
 function AddFeedback(): JSX.Element {
   return (
-    <Link className='add-feedback' to='/'>
+    <Link className='add-feedback' to='/create_feedback'>
       <span>
         <SvgIcon iconName='plus' />
       </span>
