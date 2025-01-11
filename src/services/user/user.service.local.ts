@@ -55,6 +55,15 @@ function getLoggedinUser() {
 }
 
 async function login(userCred: UserCred): Promise<User | null> {
+  const newUser: User = await storageService.post('user', {
+    _id: 'u101',
+    username: 'velvetround',
+    password: 1234,
+    name: 'Zena Kelley',
+    img: '../src/assets/user-images/image-zena.jpg',
+    isAdmin: true,
+  })
+
   const users: User[] = await storageService.query('user')
 
   const user = users.find(

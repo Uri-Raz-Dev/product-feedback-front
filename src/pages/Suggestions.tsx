@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux'
 import Sidebar from '../cmps/Sidebar'
 import { FilterBy, SortBy } from '../services/feedback.service.local'
 import SortByDropdown from '../cmps/SortBy'
+import { login } from '../store/actions/user.action'
 
 function Suggestions(): JSX.Element {
   const suggestions = useSelector(
@@ -29,6 +30,10 @@ function Suggestions(): JSX.Element {
   )
   useEffect(() => {
     loadSuggestions(filterBy, sortBy)
+    if (suggestions.length > 0) {
+      // 2) Then call login
+      login({ username: 'velvetround', password: 1234 })
+    }
   }, [filterBy, sortBy])
 
   console.log(suggestions)

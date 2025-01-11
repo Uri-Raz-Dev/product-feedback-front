@@ -5,7 +5,7 @@ const STORAGE_KEY = 'suggestions'
 
 export interface Suggestions {
   currentUser: {
-    [key: string]: string
+    [key: string]: string | number | boolean
   }
   productRequests: {
     _id: string | number
@@ -152,9 +152,12 @@ async function saveSuggestion(suggestion: EntityWithId) {
 const suggestions: Suggestions[] = [
   {
     currentUser: {
+      _id: 'u101',
       image: '../src/assets/user-images/image-zena.jpg',
       name: 'Zena Kelley',
       username: 'velvetround',
+      password: 1234,
+      isAdmin: true,
     },
     productRequests: [
       {

@@ -16,7 +16,15 @@ export interface UserActions {
   userId: string
 }
 
-export function userReducer(state: InitState, action: UserActions) {
+const initialState: InitState = {
+  users: [],
+  user: {} as User,
+}
+
+export function userReducer(
+  state: InitState = initialState,
+  action: UserActions
+) {
   let newState = state
   switch (action.type) {
     case SET_USER:
