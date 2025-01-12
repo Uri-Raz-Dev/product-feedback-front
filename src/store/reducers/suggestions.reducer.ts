@@ -82,10 +82,20 @@ export function suggestionsReducer(
 
     case SET_SUGGESTION:
       return { ...state, suggestion: action.suggestion }
+
     case ADD_SUGGESTION:
       return {
         ...state,
-        suggestions: [...state.suggestions, action.suggestion!],
+        suggestions: state.suggestions.map((sug: Suggestions) => {
+          if (sug._id === action.suggestion.productId) {
+            // Add to the relevant product's requests
+            return {
+              ...sug,
+              productRequests: [...sug.productRequests, action.suggestion],
+            }
+          }
+          return sug
+        }),
       }
     case UPDATE_SUGGESTION:
       const updatedSuggestions = state.suggestions.map((sug: Suggestions) => {

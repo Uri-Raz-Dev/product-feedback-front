@@ -55,11 +55,7 @@ export async function removeSuggestion(suggestionId: string) {
 export async function saveSuggestion(suggestion: any) {
   try {
     const newSuggestion = await feedbackService.saveSuggestion(suggestion)
-    if (suggestion._id) {
-      store.dispatch({ type: UPDATE_SUGGESTION, suggestion: newSuggestion })
-    } else {
-      store.dispatch({ type: ADD_SUGGESTION, suggestion: newSuggestion })
-    }
+    store.dispatch({ type: ADD_SUGGESTION, suggestion: newSuggestion })
   } catch (e) {
     console.log((e as Error).message)
     throw new Error("Couldn't add suggestion")

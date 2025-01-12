@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { SvgIcon } from '../cmps/Svgicon'
 import NavBack from '../cmps/NavBack'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { saveSuggestion } from '../store/actions/suggestions.action'
 
 function NewFeedback() {
@@ -11,7 +11,7 @@ function NewFeedback() {
     status: 'live',
     category: 'feature',
     upvotes: 0,
-    comments: [],
+    comments: 0,
   })
   function handleChange({ target }: any) {
     let value = target.value
@@ -31,6 +31,7 @@ function NewFeedback() {
       [field]: value,
     }))
   }
+
   function onSubmit() {
     saveSuggestion(feedbackData)
     console.log('Feedback submitted:', feedbackData)
