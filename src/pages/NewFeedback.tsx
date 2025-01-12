@@ -11,7 +11,6 @@ function NewFeedback() {
     status: 'live',
     category: 'feature',
     upvotes: 0,
-    comments: 0,
   })
   function handleChange({ target }: any) {
     let value = target.value

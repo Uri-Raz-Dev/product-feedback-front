@@ -142,24 +142,19 @@ async function getSuggestionById(
 
 export function remove(suggestion: any) {}
 async function saveSuggestion(suggestion: EntityWithId) {
-  // 1. Load the single "Suggestions" object (the first or only)
-  //    For example, maybe it’s something like:
-  //      [ { currentUser: {...}, productRequests: [...] } ]
-  const [existingSuggestions] = await storageService.query(STORAGE_KEY)
-
-  // 2. Push the new suggestion into productRequests
-  if (!existingSuggestions.productRequests) {
-    existingSuggestions.productRequests = []
+  try {
+    suggestion = { ...suggestion, _id: utilService.makeId(2) }
+    const suggestions = await storageService.query(STORAGE_KEY)
+    suggestions.forEach((item: any) => {
+      const products = item.productRequests
+      products.push(suggestion)
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(suggestions))
+    })
+    return suggestion
+  } catch (err) {
+    if (err instanceof Error) console.error(err.message)
+    throw new Error("Sorry coudn't add suggestion")
   }
-  // If `_id` is missing, generate one or handle that logic
-  suggestion._id = suggestion._id || utilService.makeId()
-  existingSuggestions.productRequests.push(suggestion)
-
-  // 3. Save back to storage
-  await storageService.put(STORAGE_KEY, [existingSuggestions])
-
-  // 4. Return the newly added suggestion (or the entire updated object)
-  return suggestion
 }
 
 if (!localStorage.getItem(STORAGE_KEY)) {

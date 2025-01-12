@@ -86,9 +86,8 @@ export function suggestionsReducer(
     case ADD_SUGGESTION:
       return {
         ...state,
-        suggestions: state.suggestions.map((sug: Suggestions) => {
+        suggestions: state.suggestions.map((sug) => {
           if (sug._id === action.suggestion.productId) {
-            // Add to the relevant product's requests
             return {
               ...sug,
               productRequests: [...sug.productRequests, action.suggestion],
