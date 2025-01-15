@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import AddFeedback from '../cmps/AddFeedback'
 import SuggestionsList from '../cmps/SuggestionsList'
 import {
@@ -13,6 +13,8 @@ import { FilterBy, SortBy } from '../services/feedback.service.local'
 import SortByDropdown from '../cmps/SortBy'
 import { login } from '../store/actions/user.action'
 import { useLocalStorage } from 'usehooks-ts'
+
+export let someArr: any[]
 
 function Suggestions(): JSX.Element {
   const suggestions = useSelector(
@@ -81,7 +83,10 @@ function Suggestions(): JSX.Element {
     <div className='suggestions-layout full main-layout'>
       <section className='feedback-menu-layout full main-layout '>
         <div className='feedback-menu'>
-          <SortByDropdown handlesortchange={handleSortChange} />
+          <SortByDropdown
+            handlesortchange={handleSortChange}
+            someArr={someArr}
+          />
           <AddFeedback />
         </div>
       </section>

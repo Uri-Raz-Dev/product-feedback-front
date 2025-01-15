@@ -48,6 +48,14 @@ export interface SortBy {
   leastcomments?: boolean
 }
 
+export interface SelectCategory {
+  UI?: boolean
+  UX?: boolean
+  Enhancement?: boolean
+  Bug?: boolean
+  Feature?: boolean
+}
+
 export const feedbackService = {
   query,
   getSuggestionById,

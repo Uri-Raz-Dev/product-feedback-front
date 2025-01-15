@@ -6,17 +6,21 @@ import {
   loadSuggestion,
   loadSuggestions,
   saveSuggestion,
+  setCategory,
+  setSortBy,
 } from '../store/actions/suggestions.action'
 import { RootState } from '../store/store'
 import { useSelector } from 'react-redux'
 import { utilService } from '../services/util.service'
+import { SelectCategory } from '../services/feedback.service.local'
+import SortByDropdown from '../cmps/SortBy'
 
 function NewFeedback() {
   const [feedbackData, setFeedbackData] = useState({
     title: '',
     description: '',
     status: 'live',
-    category: 'feature',
+    category: 'Feature',
     upvotes: 0,
   })
   const filterBy = useSelector(
@@ -28,6 +32,14 @@ function NewFeedback() {
   )
   const navigate = useNavigate()
 
+  const someArr = ['Feature', 'UI', 'UX', 'Enhancement', 'Bug']
+
+  function handleSortChange(sortType: string) {
+    setFeedbackData((prevFeedback) => ({
+      ...prevFeedback,
+      category: sortType, // Update the category in feedbackData
+    }))
+  }
   function handleChange({ target }: any) {
     let value = target.value
     const field = target.name
@@ -73,10 +85,10 @@ function NewFeedback() {
         <section className='category-container'>
           <h3>Category</h3>
           <div className='sub-header'>Choose Category for your feedback</div>
-          <div className='category-dropdown-container'>
-            <span className='category-dropdown'>Feature</span>
-            <SvgIcon iconName='arrowDown' />
-          </div>
+          <SortByDropdown
+            handlesortchange={handleSortChange}
+            someArr={someArr}
+          />
         </section>
 
         <section className='feedback-detail-container'>

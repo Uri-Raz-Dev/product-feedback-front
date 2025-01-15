@@ -2,11 +2,13 @@ import { EntityWithId } from '../../services/async-storage.service'
 import {
   feedbackService,
   FilterBy,
+  SelectCategory,
   SortBy,
 } from '../../services/feedback.service.local'
 import {
   ADD_SUGGESTION,
   REMOVE_SUGGESTION,
+  SELECT_CATEGORY,
   SET_FILTER_BY,
   SET_SIDEBAR,
   SET_SORT_BY,
@@ -71,4 +73,7 @@ export function setFilterBy(filterBy: FilterBy) {
 }
 export function setSortBy(sortBy: SortBy) {
   store.dispatch({ type: SET_SORT_BY, sortBy })
+}
+export function setCategory(selectCategory: SelectCategory) {
+  store.dispatch({ type: SELECT_CATEGORY, selectCategory })
 }

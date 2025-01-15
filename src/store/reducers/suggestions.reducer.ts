@@ -9,6 +9,7 @@ export const SET_FILTER_BY = 'SET_FILTER_BY'
 export const SET_SORT_BY = 'SET_SORT_BY'
 export const EDIT_SUGGESTION = 'EDIT_SUGGESTION'
 export const SET_SIDEBAR = 'SET_SIDEBAR'
+export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 
 type SuggestionsState = {
   suggestions: Suggestions[]
@@ -28,6 +29,14 @@ type SuggestionsState = {
     mostcomments?: boolean
     leastcomments?: boolean
   }
+
+  selectCategory?: {
+    UI?: boolean
+    UX?: boolean
+    Enhancement?: boolean
+    Bug?: boolean
+    Feature?: boolean
+  }
 }
 
 type ReducerAction = {
@@ -39,6 +48,13 @@ type ReducerAction = {
   sidebar?: boolean
   filterBy?: {
     ALL?: boolean
+    UI?: boolean
+    UX?: boolean
+    Enhancement?: boolean
+    Bug?: boolean
+    Feature?: boolean
+  }
+  selectCategory?: {
     UI?: boolean
     UX?: boolean
     Enhancement?: boolean
@@ -70,6 +86,14 @@ const initialState: SuggestionsState = {
     leastupvotes: true,
     mostcomments: true,
     leastcomments: true,
+  },
+
+  selectCategory: {
+    UI: true,
+    UX: true,
+    Enhancement: true,
+    Bug: true,
+    Feature: true,
   },
 }
 export function suggestionsReducer(
@@ -128,6 +152,8 @@ export function suggestionsReducer(
       return { ...state, filterBy: action.filterBy }
     case SET_SORT_BY:
       return { ...state, sortBy: action.sortBy }
+    case SELECT_CATEGORY:
+      return { ...state, selectCategory: action.selectCategory }
 
     default:
       return state

@@ -2,8 +2,15 @@ import { useEffect, useRef, useState } from 'react'
 import { SvgIcon } from './Svgicon'
 interface SortByProps {
   handlesortchange: (sortType: string) => void
+  someArr: any[]
+  selectCategory?: string
 }
-function SortByDropdown({ handlesortchange }: SortByProps): JSX.Element {
+
+function SortByDropdown({
+  handlesortchange,
+  someArr,
+  selectCategory,
+}: SortByProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState('Most Upvotes')
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -42,12 +49,7 @@ function SortByDropdown({ handlesortchange }: SortByProps): JSX.Element {
         </button>
         {isOpen && (
           <div className='dropdown-content'>
-            {[
-              'Most Upvotes',
-              'Least Upvotes',
-              'Most Comments',
-              'Least Comments',
-            ].map((option) => (
+            {someArr.map((option) => (
               <a
                 key={option}
                 href='#'
@@ -57,11 +59,12 @@ function SortByDropdown({ handlesortchange }: SortByProps): JSX.Element {
                 }}
               >
                 <span>{option}</span>
-                {option === selected && (
-                  <span className='check'>
-                    <SvgIcon iconName='check' />
-                  </span>
-                )}
+                {option === selected ||
+                  (option === selectCategory && (
+                    <span className='check'>
+                      <SvgIcon iconName='check' />
+                    </span>
+                  ))}
               </a>
             ))}
           </div>
