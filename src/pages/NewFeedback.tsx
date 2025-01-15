@@ -1,8 +1,15 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { SvgIcon } from '../cmps/Svgicon'
 import NavBack from '../cmps/NavBack'
 import { useEffect, useState } from 'react'
-import { saveSuggestion } from '../store/actions/suggestions.action'
+import {
+  loadSuggestion,
+  loadSuggestions,
+  saveSuggestion,
+} from '../store/actions/suggestions.action'
+import { RootState } from '../store/store'
+import { useSelector } from 'react-redux'
+import { utilService } from '../services/util.service'
 
 function NewFeedback() {
   const [feedbackData, setFeedbackData] = useState({
@@ -12,6 +19,15 @@ function NewFeedback() {
     category: 'feature',
     upvotes: 0,
   })
+  const filterBy = useSelector(
+    (state: RootState) => state.suggestionsModule.filterBy
+  )
+
+  const sortBy = useSelector(
+    (state: RootState) => state.suggestionsModule.sortBy
+  )
+  const navigate = useNavigate()
+
   function handleChange({ target }: any) {
     let value = target.value
     const field = target.name
@@ -75,9 +91,14 @@ function NewFeedback() {
             value={feedbackData.description}
           ></textarea>
           <div className='feedback-btn-container'>
-            <Link to={'/'} onClick={onSubmit}>
+            <div
+              onClick={(e) => {
+                e.preventDefault()
+                saveSuggestion(feedbackData).then(() => navigate('/'))
+              }}
+            >
               Add Feedback
-            </Link>
+            </div>
             <span>Cancel</span>
           </div>
         </section>

@@ -18,6 +18,11 @@ function Suggestions(): JSX.Element {
   const suggestions = useSelector(
     (state: RootState) => state.suggestionsModule.suggestions
   )
+
+  const suggestion = useSelector(
+    (state: RootState) => state.suggestionsModule.suggestion
+  )
+
   const sidebar = useSelector(
     (state: RootState) => state.suggestionsModule.sidebar
   )
@@ -36,7 +41,7 @@ function Suggestions(): JSX.Element {
     loadSuggestions(filterBy, sortBy)
 
     login({ username: 'velvetround', password: 1234 })
-  }, [filterBy, sortBy])
+  }, [filterBy, sortBy, suggestion])
 
   console.log(suggestions)
   const categories: string[] = [

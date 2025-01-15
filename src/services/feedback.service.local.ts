@@ -143,7 +143,10 @@ async function getSuggestionById(
 export function remove(suggestion: any) {}
 async function saveSuggestion(suggestion: EntityWithId) {
   try {
-    suggestion = { ...suggestion, _id: utilService.makeId(2) }
+    suggestion = {
+      ...suggestion,
+      _id: utilService.getRandomIntInclusive(100, 10000),
+    }
     const suggestions = await storageService.query(STORAGE_KEY)
     suggestions.forEach((item: any) => {
       const products = item.productRequests

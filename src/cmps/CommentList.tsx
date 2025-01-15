@@ -20,18 +20,19 @@ export type replies = {
 
 function CommentList({ suggestion }: suggestion) {
   // console.log(suggestion)
-
-  const replies = suggestion.comments.flatMap((comment) => {
+  const comments = suggestion.comments || []
+  const replies = comments.flatMap((comment) => {
     return comment.replies
   })
-
+  console.log('sug', suggestion)
   return (
     <>
       <ul className='comment-list'>
         <h2 className='comment-count'>
-          {suggestion.comments.length + replies.length - 1} Comments
+          {comments.length > 0 ? comments.length + replies.length - 1 : 0}{' '}
+          Comments
         </h2>
-        {suggestion.comments.map((comment: comments) => {
+        {comments.map((comment: comments) => {
           return (
             <CommentDetail
               key={comment._id}
