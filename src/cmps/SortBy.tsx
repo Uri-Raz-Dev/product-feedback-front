@@ -4,12 +4,18 @@ interface SortByProps {
   handlesortchange: (sortType: string) => void
   someArr: any[]
   selectCategory?: string
+  sug?: {
+    category: string
+  }
+  id?: any
 }
 
 function SortByDropdown({
   handlesortchange,
   someArr,
   selectCategory,
+  sug,
+  id,
 }: SortByProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState('Most Upvotes')
@@ -60,11 +66,13 @@ function SortByDropdown({
               >
                 <span>{option}</span>
                 {option === selected ||
-                  (option === selectCategory && (
-                    <span className='check'>
-                      <SvgIcon iconName='check' />
-                    </span>
-                  ))}
+                  (id
+                    ? option === sug.category
+                    : option === selectCategory && (
+                        <span className='check'>
+                          <SvgIcon iconName='check' />
+                        </span>
+                      ))}
               </a>
             ))}
           </div>

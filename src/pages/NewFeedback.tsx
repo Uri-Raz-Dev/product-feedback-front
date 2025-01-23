@@ -55,10 +55,15 @@ function NewFeedback() {
   }, [suggestion, id])
 
   function handleSortChange(sortType: string) {
-    setFeedbackData((prevFeedback) => ({
-      ...prevFeedback,
-      category: sortType, // Update the category in feedbackData
-    }))
+    id
+      ? setSug((prevSug: any) => ({
+          ...prevSug,
+          category: sortType,
+        }))
+      : setFeedbackData((prevFeedback) => ({
+          ...prevFeedback,
+          category: sortType, // Update the category in feedbackData
+        }))
   }
   function handleChange({ target }: any) {
     let value = target.value
@@ -114,6 +119,8 @@ function NewFeedback() {
           <SortByDropdown
             handlesortchange={handleSortChange}
             someArr={someArr}
+            sug={sug}
+            id={id}
           />
         </section>
 
