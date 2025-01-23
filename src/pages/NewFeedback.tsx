@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { SvgIcon } from '../cmps/Svgicon'
 import NavBack from '../cmps/NavBack'
 import { useEffect, useState } from 'react'
@@ -30,9 +30,17 @@ function NewFeedback() {
   const sortBy = useSelector(
     (state: RootState) => state.suggestionsModule.sortBy
   )
-  const navigate = useNavigate()
 
+  const navigate = useNavigate()
+  const { id } = useParams()
+  const suggestion = useSelector(
+    (state: RootState) => state.suggestionsModule.suggestion
+  )
   const someArr = ['Feature', 'UI', 'UX', 'Enhancement', 'Bug']
+
+  useEffect(() => {
+    loadSuggestion(id!)
+  }, [id])
 
   function handleSortChange(sortType: string) {
     setFeedbackData((prevFeedback) => ({
@@ -58,6 +66,7 @@ function NewFeedback() {
       [field]: value,
     }))
   }
+  console.log(suggestion)
 
   function onSubmit() {
     saveSuggestion(feedbackData)
@@ -78,7 +87,7 @@ function NewFeedback() {
             onChange={handleChange}
             name='title'
             id='feedback-title'
-            value={feedbackData.title}
+            value={id ? suggestion.title : feedbackData.title}
           ></textarea>
         </section>
 
@@ -100,7 +109,7 @@ function NewFeedback() {
             onChange={handleChange}
             name='description'
             id='feedback-detail'
-            value={feedbackData.description}
+            value={id ? suggestion.description : feedbackData.description}
           ></textarea>
           <div className='feedback-btn-container'>
             <div
@@ -109,7 +118,7 @@ function NewFeedback() {
                 saveSuggestion(feedbackData).then(() => navigate('/'))
               }}
             >
-              Add Feedback
+              {id ? 'Edit  Feedback' : 'Add Feedback'}
             </div>
             <span>Cancel</span>
           </div>

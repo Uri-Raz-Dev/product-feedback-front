@@ -27,6 +27,10 @@ export function App() {
               <Route element={<FeedbackDetail />} path='/feedback/:id'></Route>
               <Route element={<NewFeedback />} path='/create_feedback/'></Route>
               <Route
+                element={<NewFeedback />}
+                path='/create_feedback/:id'
+              ></Route>
+              <Route
                 element={<EditFeedback />}
                 path='/edit_feedback/:id'
               ></Route>

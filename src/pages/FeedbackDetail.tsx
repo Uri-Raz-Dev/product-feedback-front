@@ -22,7 +22,7 @@ function FeedbackDetail() {
 
   return (
     <section className='feedback-detail'>
-      <FeedbackHeader />
+      <FeedbackHeader id={id} />
       <SuggestionCard suggestion={suggestion} />
       <CommentsList suggestion={suggestion} />
       <AddComment />
