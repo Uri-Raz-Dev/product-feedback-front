@@ -61,6 +61,7 @@ export const feedbackService = {
   getSuggestionById,
   remove,
   saveSuggestion,
+  editSuggestion,
 }
 
 async function query(
@@ -165,6 +166,47 @@ async function saveSuggestion(suggestion: EntityWithId) {
   } catch (err) {
     if (err instanceof Error) console.error(err.message)
     throw new Error("Sorry coudn't add suggestion")
+  }
+}
+async function editSuggestion(updatedSuggestion: EntityWithId) {
+  try {
+    const suggestions = await storageService.query(STORAGE_KEY)
+
+    // Find the parent item that contains the `productRequests` array
+    const parentIdx = suggestions.findIndex((item: any) =>
+      item.productRequests.some(
+        (product: any) => product._id === updatedSuggestion._id
+      )
+    )
+
+    if (parentIdx < 0) {
+      throw new Error(
+        `Update failed, cannot find entity with id: ${updatedSuggestion._id} in: ${STORAGE_KEY}`
+      )
+    }
+
+    // Find the index of the specific suggestion within `productRequests`
+    const parent = suggestions[parentIdx]
+    const productIdx = parent.productRequests.findIndex(
+      (product: any) => product._id === updatedSuggestion._id
+    )
+
+    if (productIdx < 0) {
+      throw new Error(
+        `Update failed, cannot find product with id: ${updatedSuggestion._id} in productRequests`
+      )
+    }
+
+    // Update the suggestion
+    parent.productRequests[productIdx] = updatedSuggestion
+
+    // Save updated suggestions to localStorage
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(suggestions))
+
+    return updatedSuggestion
+  } catch (err) {
+    if (err instanceof Error) console.error(err.message)
+    throw new Error("Sorry, couldn't edit suggestion")
   }
 }
 

@@ -8,6 +8,7 @@ import {
   saveSuggestion,
   setCategory,
   setSortBy,
+  updateSuggestion,
 } from '../store/actions/suggestions.action'
 import { RootState } from '../store/store'
 import { useSelector } from 'react-redux'
@@ -23,6 +24,7 @@ function NewFeedback() {
     category: 'Feature',
     upvotes: 0,
   })
+
   const filterBy = useSelector(
     (state: RootState) => state.suggestionsModule.filterBy
   )
@@ -34,13 +36,23 @@ function NewFeedback() {
   const navigate = useNavigate()
   const { id } = useParams()
   const suggestion = useSelector(
-    (state: RootState) => state.suggestionsModule.suggestion
+    (state: RootState) => state.suggestionsModule.suggestion || {}
   )
+  const [sug, setSug] = useState(suggestion)
+
   const someArr = ['Feature', 'UI', 'UX', 'Enhancement', 'Bug']
 
   useEffect(() => {
-    loadSuggestion(id!)
+    if (id) {
+      loadSuggestion(id)
+    }
   }, [id])
+
+  useEffect(() => {
+    if (id) {
+      setSug(suggestion) // Sync local state with Redux suggestion
+    }
+  }, [suggestion, id])
 
   function handleSortChange(sortType: string) {
     setFeedbackData((prevFeedback) => ({
@@ -61,10 +73,15 @@ function NewFeedback() {
       default:
         break
     }
-    setFeedbackData((prevFeedback) => ({
-      ...prevFeedback,
-      [field]: value,
-    }))
+    id
+      ? setSug((prevSug: any) => ({
+          ...prevSug,
+          [field]: value,
+        }))
+      : setFeedbackData((prevFeedback) => ({
+          ...prevFeedback,
+          [field]: value,
+        }))
   }
   console.log(suggestion)
 
@@ -87,7 +104,7 @@ function NewFeedback() {
             onChange={handleChange}
             name='title'
             id='feedback-title'
-            value={id ? suggestion.title : feedbackData.title}
+            value={id ? sug.title || '' : feedbackData.title}
           ></textarea>
         </section>
 
@@ -109,13 +126,15 @@ function NewFeedback() {
             onChange={handleChange}
             name='description'
             id='feedback-detail'
-            value={id ? suggestion.description : feedbackData.description}
+            value={id ? sug.description || '' : feedbackData.description}
           ></textarea>
           <div className='feedback-btn-container'>
             <div
               onClick={(e) => {
                 e.preventDefault()
-                saveSuggestion(feedbackData).then(() => navigate('/'))
+                id
+                  ? updateSuggestion(sug).then(() => navigate('/'))
+                  : saveSuggestion(feedbackData).then(() => navigate('/'))
               }}
             >
               {id ? 'Edit  Feedback' : 'Add Feedback'}

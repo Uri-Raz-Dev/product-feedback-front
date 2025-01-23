@@ -7,6 +7,7 @@ import {
 } from '../../services/feedback.service.local'
 import {
   ADD_SUGGESTION,
+  EDIT_SUGGESTION,
   REMOVE_SUGGESTION,
   SELECT_CATEGORY,
   SET_FILTER_BY,
@@ -58,6 +59,16 @@ export async function saveSuggestion(suggestion: any) {
   try {
     const newSuggestion = await feedbackService.saveSuggestion(suggestion)
     store.dispatch({ type: ADD_SUGGESTION, suggestion: newSuggestion })
+  } catch (e) {
+    console.log((e as Error).message)
+    throw new Error("Couldn't add suggestion")
+  }
+}
+
+export async function updateSuggestion(suggestion: any) {
+  try {
+    const updatedSuggestion = await feedbackService.editSuggestion(suggestion)
+    store.dispatch({ type: EDIT_SUGGESTION, suggestion: updatedSuggestion })
   } catch (e) {
     console.log((e as Error).message)
     throw new Error("Couldn't add suggestion")
