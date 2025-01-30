@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { SvgIcon } from './Svgicon'
+import { log } from 'console'
+import { useLocation } from 'react-router-dom'
 interface SortByProps {
   handlesortchange: (sortType: string) => void
   someArr: any[]
@@ -25,7 +27,7 @@ function SortByDropdown({
     handlesortchange(option)
     setIsOpen(false)
   }
-
+  const location = useLocation()
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -42,8 +44,12 @@ function SortByDropdown({
     }
   }, [])
 
+  console.log('Arr', someArr)
   return (
-    <div className='sort-dropdown' ref={dropdownRef}>
+    <div
+      className='sort-dropdown category-dropdown-container'
+      ref={dropdownRef}
+    >
       <div className='sort-menu'>
         <button className='dropdown-button' onClick={() => setIsOpen(!isOpen)}>
           <div>
@@ -55,26 +61,49 @@ function SortByDropdown({
         </button>
         {isOpen && (
           <div className='dropdown-content'>
-            {someArr.map((option) => (
-              <a
-                key={option}
-                href='#'
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleOptionClick(option)
-                }}
-              >
-                <span>{option}</span>
-                {option === selected ||
-                  (id
-                    ? option === sug.category
-                    : option === selectCategory && (
-                        <span className='check'>
-                          <SvgIcon iconName='check' />
-                        </span>
-                      ))}
-              </a>
-            ))}
+            {location.pathname === '/create_feedback'
+              ? someArr.map((option) => (
+                  <a
+                    key={option}
+                    href='#'
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleOptionClick(option)
+                    }}
+                  >
+                    <span>{option}</span>
+                    {option === selected ||
+                      (id
+                        ? option === sug.category
+                        : option === selectCategory && (
+                            <span className='check'>
+                              <SvgIcon iconName='check' />
+                            </span>
+                          ))}
+                  </a>
+                ))
+              : [
+                  'Most Upvotes',
+                  'Least Upvotes',
+                  'Most Comments',
+                  'Least Comments',
+                ].map((option) => (
+                  <a
+                    key={option}
+                    href='#'
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleOptionClick(option)
+                    }}
+                  >
+                    <span>{option}</span>
+                    {option === selected && (
+                      <span className='check'>
+                        <SvgIcon iconName='check' />
+                      </span>
+                    )}
+                  </a>
+                ))}
           </div>
         )}
       </div>
