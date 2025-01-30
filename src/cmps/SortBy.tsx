@@ -21,9 +21,11 @@ function SortByDropdown({
 }: SortByProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState('Most Upvotes')
+  const [selectedCategory, setSelectedCategory] = useState('Feature')
   const dropdownRef = useRef<HTMLDivElement>(null)
   const handleOptionClick = (option: string) => {
     setSelected(option)
+    setSelectedCategory(option)
     handlesortchange(option)
     setIsOpen(false)
   }
@@ -52,9 +54,16 @@ function SortByDropdown({
     >
       <div className='sort-menu'>
         <button className='dropdown-button' onClick={() => setIsOpen(!isOpen)}>
-          <div>
-            Sort by : <span className='selected-option'>{selected}</span>{' '}
-          </div>
+          {location.pathname === '/create_feedback' ? (
+            <div>
+              <span className='selected-option'>{selectedCategory}</span>{' '}
+            </div>
+          ) : (
+            <div>
+              Sort by : <span className='selected-option'>{selected}</span>{' '}
+            </div>
+          )}
+
           <div className={isOpen ? 'dropdown-arrow-open' : 'dropdown-arrow'}>
             <SvgIcon iconName='arrowDown' />
           </div>
@@ -72,9 +81,9 @@ function SortByDropdown({
                     }}
                   >
                     <span>{option}</span>
-                    {option === selected ||
+                    {option === selectedCategory ||
                       (id
-                        ? option === sug.category
+                        ? option === sug?.category
                         : option === selectCategory && (
                             <span className='check'>
                               <SvgIcon iconName='check' />

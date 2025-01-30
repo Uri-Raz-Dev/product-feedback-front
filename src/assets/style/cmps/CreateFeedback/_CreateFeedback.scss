@@ -92,14 +92,43 @@
 }
 
 .category-container {
+
     .category-dropdown-container {
         display: flex;
         padding: rem(14px);
-        justify-content: space-between;
         background-color: $white3;
         border-radius: rem(10px);
 
+    }
 
+    .sort-menu {
+        width: 100%;
+
+        .dropdown-button {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+
+            >div:first-of-type {
+
+
+
+                >* {
+                    color: $deepblue2;
+                    font-weight: normal;
+                }
+            }
+
+
+
+            .dropdown-arrow {
+                stroke: $blue;
+            }
+
+            .dropdown-arrow-open {
+                stroke: $blue;
+            }
+        }
     }
 }
 
